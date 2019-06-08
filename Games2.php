@@ -1,3 +1,17 @@
+
+ <?php
+  session_start();
+  if (isset($_SESSION['Username'])){
+
+    $pageTitle = 'Games';
+    include 'connect.php';
+    include 'includes/functions/functions.php';
+    include 'includes/templates/header.php';
+    include "includes/languages/english.php";
+    //include 'includes/templates/navbar.php';
+    include "includes/templates/footer.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -70,53 +84,22 @@
         <h3 class="uppercase">our games</h3>
         <p class=" lead capitalize">2019 National games Critics Circle Award Winners </p>
       </div>
-      <div class="performance capitalize">
-        <div class="row">
+      <?php
+        foreach (getGames() as $game){
+          echo ' <div class="row">
           <div class="col-md-4">
-            <img class="img-fluid img-responsive" src="css/pubg.png" alt="pic">
-            <h5 class="underline uppercase">pubg mobile</h5>
-            <p><span>description:</span> Adventurous one</p>
-            <p><span>reqirment:</span> god of war</p>
-            <p><span>others:</span></p>
+            <img class="img-fluid img-responsive" src="'. $game['Image'] . '" alt="pic">
+            <h5 class="underline uppercase">' . $game['Name']. '</h5>
+            <p><span>description:</span>' . $game['Description'] . '</p>
+            <p><span>reqirment:</span>' . $game['Requirements'] . '</p>
+            <p><span>others:</span>' . $game['Other'] . '</p>
           </div>
-          <div class="col-md-4">
-            <img class="img-fluid img-responsive" src="css/pubg.png" alt="pic">
-            <h5 class="underline uppercase">pubg mobile</h5>
-            <p><span>description:</span> Adventurous one</p>
-            <p><span>reqirment:</span> god of war</p>
-            <p><span>others:</span></p>
-          </div>
-          <div class="col-md-4">
-            <img class="img-fluid img-responsive" src="css/pubg.png" alt="pic">
-            <h5 class="underline uppercase">pubg mobile</h5>
-            <p><span>description:</span> Adventurous one</p>
-            <p><span>reqirment:</span> god of war</p>
-            <p><span>others:</span></p>
-          </div>
-          <div class="col-md-4">
-            <img class="img-fluid img-responsive" src="css/pubg.png" alt="pic">
-            <h5 class="underline uppercase">pubg mobile</h5>
-            <p><span>description:</span> Adventurous one</p>
-            <p><span>reqirment:</span> god of war</p>
-            <p><span>others:</span></p>
-          </div>
-          <div class="col-md-4">
-            <img class="img-fluid img-responsive" src="css/pubg.png" alt="pic">
-            <h5 class="underline uppercase">pubg mobile</h5>
-            <p><span>description:</span> Adventurous one</p>
-            <p><span>reqirment:</span> god of war</p>
-            <p><span>others:</span></p>
-          </div>
-          <div class="col-md-4">
-            <img class="img-fluid img-responsive" src="css/pubg.png" alt="pic">
-            <h5 class="underline uppercase">pubg mobile</h5>
-            <p><span>description:</span> Adventurous one</p>
-            <p><span>reqirment:</span> god of war</p>
-            <p><span>others:</span></p>
-          </div>
-        </div>
-      </div>   
+        </div>';
+        }
+
+    ?>
     </div>  
+
   </section>
 
 <!-- end games -->
@@ -182,3 +165,11 @@
     
   </body>
 </html>
+
+  <?php
+
+}else{
+  echo ' enta khammam ';
+    header('Location: index.php');
+    exit();
+}

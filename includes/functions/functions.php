@@ -34,7 +34,7 @@
 
 			echo "<div class='alert alert-info'>You will be redirected to $link after $seconds seconds</div>";
 
-			header("refresh:$seconds;url=$url");
+			header("refresh:$seconds;url=$url");	
 
 		exit();
 
@@ -51,4 +51,17 @@
 		$count = $stmt->rowCount();
 
 		return $count;
+	}
+
+	function getGames(){
+
+		global $con;
+
+		$getGames= $con->prepare("SELECT * FROM playstation4");
+
+		$getGames->execute();
+
+		$games = $getGames->fetchAll();
+
+		return $games;
 	}

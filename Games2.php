@@ -84,20 +84,26 @@
         <h3 class="uppercase">our games</h3>
         <p class=" lead capitalize">2019 National games Critics Circle Award Winners </p>
       </div>
+      <div class="performance capitalize">
+        <div class="row">
       <?php
+
+
         foreach (getGames() as $game){
-          echo ' <div class="row">
-          <div class="col-md-4">
-            <img class="img-fluid img-responsive" src="'. $game['Image'] . '" alt="pic">
-            <h5 class="underline uppercase">' . $game['Name']. '</h5>
-            <p><span>description:</span>' . $game['Description'] . '</p>
-            <p><span>reqirment:</span>' . $game['Requirements'] . '</p>
-            <p><span>others:</span>' . $game['Other'] . '</p>
-          </div>
-        </div>';
+         
+          echo ' <div class="col-md-4">';
+          echo "<img src='Uploads/Games/" . $game['Image'] . "' alt='' >";
+          echo '<h5 class="underline uppercase">' . $game['Name']. '</h5>';
+          echo '<p><span>description:</span>' . $game['Description'] . '</p>';
+          echo '<p><span>reqirment:</span>' . $game['Requirements'] . '</p>';
+          echo  '<p><span>others:</span>' . $game['Other'] . '</p>';
+          echo '</div> ';
+    
         }
 
     ?>
+  </div>
+  </div>
     </div>  
 
   </section>

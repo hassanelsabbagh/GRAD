@@ -24,8 +24,10 @@
     $row = $stmt->fetch();
   	$count = $stmt->rowCount();
  
-  	if ($count == 1){
-  		echo $srch . " Item Found";
+  	if ($count > 0){
+
+
+  		
   	}else{
   		echo "no";
   	}

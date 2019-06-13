@@ -100,6 +100,7 @@ if ($do == 'Add') { ?>
           <input class="choospic" type="file" name="Image" accept="image/*"> 
           <textarea rows="4" cols="50" class="form-control input-lg faco" type="text" name="requirements" placeholder="requirements"></textarea>
           <textarea rows="4" cols="50" class="form-control input-lg faco" type="text" name="other" placeholder="Others"></textarea>
+
           <input type="Submit" class="btn btn-danger btn-lg"></input>
   </form>
   
@@ -127,7 +128,8 @@ if ($do == 'Add') { ?>
         
         $reqs   = $_POST['requirements'];
         $other   = $_POST['other'];
-
+    
+        $userid = $_SESSION['ID'];
 
         $errors = array();
 
@@ -159,13 +161,14 @@ if ($do == 'Add') { ?>
           $imagee = rand(0, 100000) . '_' . $imgName;
           move_uploaded_file($imgTmp, "Uploads\Games\\" . $imagee);
         
-          $stmt = $con->prepare("INSERT INTO playstation4(Name, Description, Image, Requirements, Other) VALUES(:zname, :zdesc, :zimg, :zreqs, :zother)");
+          $stmt = $con->prepare("INSERT INTO playstation4(Name, Description, Image, Requirements, Other, user_id) VALUES(:zname, :zdesc, :zimg, :zreqs, :zother, :zmember)");
           $stmt->execute(array(
             'zname' => $name,
             'zdesc' => $desc,
             'zimg' => $imagee,
             'zreqs' => $reqs,
-            'zother' => $other
+            'zother' => $other,
+            'zmember' => $userid
           ));
 
           echo '<div class="alert alert-success">' . $stmt->rowCount(). 'record inserted</div>';

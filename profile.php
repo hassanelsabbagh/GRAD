@@ -1,7 +1,20 @@
+<?php
+  session_start();
+  if (isset($_SESSION['Username'])){
+
+    $pageTitle = 'Games';
+    include 'connect.php';
+    include 'includes/functions/functions.php';
+    include 'includes/templates/header.php';
+    include "includes/languages/english.php";
+    //include 'includes/templates/navbar.php';
+    include "includes/templates/footer.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>The Swap &mdash; Homepage</title>
+    <title>The Swap &mdash; Games</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -34,24 +47,24 @@
       <div class="site-mobile-menu-body"></div>
     </div>
     
-    <!----menue tetlam--->
+    <!----menue yetlam--->
     <header class="site-navbar py-3" role="banner">
       <div class="container-fluid">
         <div class="row align-items-center">
           <div class="col-11 col-xl-2">
-            <h1 class="mb-0"><a href="home.html" class="text-white h2 mb-0">The<span class="text-primary">Swap</span> </a></h1>
+            <h1 class="mb-0"><a href="Home.html" class="text-white h2 mb-0">The<span class="text-primary">Swap</span> </a></h1>
           </div>
     <!----Navbar--->
           <div class="col-12 col-md-10 d-none d-xl-block">
             <nav class="site-navigation position-relative text-right" role="navigation">
               <ul class="site-menu js-clone-nav mx-auto d-none d-lg-block">
-                <li class="active"><a href="dashboard.php">Home</a></li>
-                <li><a href="profile.php">Profile</a></li>
+                <li><a href="Home.html">Home</a></li>
+                <li><a href="Profile.html">Profile</a></li>
                 <li><a href="Traders.html">Traders</a></li>
-                <li><a href="Games2.php">Games</a></li>
-                <li><a href="books.html">Books</a></li>
-                <li><a href="emptycart.html"><span class="fa fa-shopping-cart"></span></a></li>  
-                <li class="cta"><a href="logout.php">Logout</a></li>              
+                <li class="active"><a href="Games.html">Games</a></li>
+                <li><a href="Books.html">Books</a></li>
+                <li><a href="#"> <span class="fa fa-shopping-cart"></span></a></li>  
+                <li class="cta"><a href="login.html">Logout</a></li>              
               </ul>
             </nav>
           </div>
@@ -59,70 +72,57 @@
           </div>
         </div>
       </div>
-
+</header>
  <!-----tittle----->
+</br></br></br>
 
-    </header>
-    <div class="site-section site-hero">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-md-11">  
-                  <center><h1 class="d-block mb-4" data-aos="fade-up" data-aos-delay="75" style="margin-top: -400px; font-size: 65px">SHARE YOUR NEW ADVANTURE</h1></center>
-                  <center><h1 class="d-block mb-4" data-aos="fade-down" data-aos-delay="150" style="font-size: 65px">AND GET YOUR OWN</h1></center>
-                  <center><span class="d-block mb-3 caption" data-aos="fade-up" data-aos-delay="100">Search for the Book/Video game you</span></center>
-                  <center><span class="d-block mb-3 caption" data-aos="fade-up" data-aos-delay="100">want offered by other trader</span></center>
-          </span>
+
+<?php
+
+
+    $stmt = $con->prepare("SELECT username, Email, Fullname FROM users WHERE usrID = ? ");
+    $stmt->execute(array($_SESSION['ID']));
+    $row = $stmt->fetch();
+
+
+
+   ?>
+
+    <div class="container">
+      <input type="hidden" name="userid" value="<?php echo $userid ?>">
+      <div class="form-group">
+        <label class="col-sm-2 control-label"> Username</label>
+        <div class="col-sm-10">
+          <label class="control-label"><?php echo $row['username'] ?></label>
           </div>
-        </div>
-      </div>
-    </div>
+          </div> 
+          <div class="form-group">
+        <label class="col-sm-2 control-label">E-mail </label>
+        <div class="col-sm-10">
+          <label class="control-label"><?php echo $row['Email'] ?></label>
+          </div>
+          </div> 
+        <div class="form-group">
+        <label class="col-sm-2 control-label"> Full Name</label>
+        <div class="col-sm-10">
+          <label class="control-label"><?php echo $row['Fullname'] ?></label>
+          </div>
+          </div> 
 
- <!-----box----->
+          <?php
 
-<div>
-<center>
-  <div style=" 
-  border-radius: 15px 50px;
-  background: #FF4500;
-  padding: 100px; 
-  width: 280px;
-  height: 50px;
-  margin-top: -370px;">
-  <p id="rcorners3"></p>
-  
-</br>
-    <form class="form-inline my-2 my-lg-0" action="results.php" method="POST">
-      <input class="form-control mr-sm-2" name="search" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0"   type="submit">Search</button>
-    </form>
+            echo '<center> <a href="members.php?do=Edit&userid=' . $_SESSION['ID'] . '" class="btn-custom data-aos-delay="50" style="margin-top: : 10000px"><span>Edit Profile</span></a></center>';
+            ?>
+            
+  </div>
 
-        </br>
+  <?php
+    
 
-</br></br></br></center> 
-        
+    ?>
 
-
-</br>
-</br>
-</div>
-
-
-                </center>
-                  </div>
-        
-                </table>
-        </div></center>
-      </div>
-    </br>
-      <div>
-           <center> <a href="categories2.php?do=Add" class="btn-custom data-aos-delay="50" style="margin-top: : 10000px"><span>Post Item</span></a></center>
-</div>
-  
-    </div></center>
-</br></br>
-
-<!---fotter-->
-      
+</br></br></br></br></br></br></br></br>
+ <!------Footer---->
     <footer class="site-footer">
       <div class="container">
         <div class="row mb-5">
@@ -131,9 +131,6 @@
 
           <p>This website was mainly developed for a course project. the course is mainly about database creation but we created a website to integrate with database to be more professional about our work this project was developed by four AAST students 
     <ul><li>Ahmed Bakr</li><li>Hassan El-Sabag</li><li>Ahmed El-Nagar</li><li>Mohamed Medhat</li></ul>
-
-
-
 
           </div>
           <div class="col-md-3 ml-auto">
@@ -182,3 +179,11 @@
     
   </body>
 </html>
+
+  <?php
+
+}else{
+  echo ' enta khammam ';
+    header('Location: index.php');
+    exit();
+}

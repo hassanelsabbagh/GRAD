@@ -88,18 +88,37 @@
         <div class="row">
       <?php
 
+      $do = '';
+
+      if( isset($_GET['do'])){
+
+        $do = $_GET['do'];
+
+      }else{
+
+        $do = 'Manage';
+            }
+
+
 
         foreach (getGames() as $game){
+          
+
+         echo "<form method='POST' action='?do=add'>";
          
           echo ' <div class="col-md-4">';
           echo "<img src='Uploads/Games/" . $game['Image'] . "' alt='' >";
           echo '<h5 class="underline uppercase">' . $game['Name']. '</h5>';
-          echo  '<p><span>Posted by: </span>' . $_SESSION['Username'] . '</p>';
+          echo  '<p><span>Posted by: </span>' . $game['username'] . '</p>';
           echo '<p><span>description: </span>' . $game['Description'] . '</p>';
           echo '<p><span>reqirment: </span>' . $game['Requirements'] . '</p>';
           echo  '<p><span>others: </span>' . $game['Other'] . '</p>';
-          echo '<center> <a href="#" class="btn-custom data-aos-delay="50" style="margin-top: : 10000px; padding: 7px 10px; font-size: 1px"><span>Add To Cart</span></a></center>';
+          
+          echo '<center> <input type="submit" class="btn-custom data-aos-delay="50" value="Add To Cart" style="margin-top: : 10000px; padding: 7px 10px; font-size: 1px"/></center>';
           echo '</div> ';
+
+
+          echo '</form>';
     
         }
 
@@ -109,6 +128,49 @@
     </div>  
 
   </section>
+  <?php
+
+
+  if ($do == 'add'){
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+
+        
+    $stmt = $con->prepare("SELECT usrID, itemID FROM cart WHERE usrID=? AND itemID=?");
+
+    $stmt->execute(array($_SESSION['ID'], ));
+
+    $count = $stmt->rowCount();
+
+
+          if ($count == 1){
+
+            echo '<div class="alert alert-danger">This item already added to cart</div>';
+
+            
+          }else{
+
+               $stmt2 = $con->prepare("INSERT INTO cart(usrID, itemID) VALUES(:zuser, :zitem)");
+               $stmt2->execute(array(
+               'zuser' => $_SESSION['ID'],
+               'zitem' => $game['ID']
+
+                ));
+
+              echo '<div class="alert alert-success">' . $game['Name']. ' is added to cart</div>';
+
+          
+
+
+          }
+
+
+}
+}
+
+
+?>
 
 <!-- end games -->
 

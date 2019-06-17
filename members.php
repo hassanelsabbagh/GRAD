@@ -26,7 +26,7 @@ if ($do == 'Manage'){
 	if ($check == 1)
 		echo "success";
 
-} elseif ($do == 'Edit'){ 
+  } elseif ($do == 'Edit'){ 
 	$userid = isset($_GET['userid']) && is_numeric($_GET['userid']) ? intval($_GET['userid']) : 'l2a';
 
 	$stmt = $con->prepare("SELECT * FROM users WHERE usrID = ? LIMIT 1");
@@ -226,6 +226,8 @@ if ($do == 'Manage'){
       }
   	
   	}
+
+    
 
   	
   } else {

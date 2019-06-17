@@ -107,7 +107,7 @@
  
     if ($count > 0){
 
-    $stmt = $con->prepare("SELECT * FROM playstation4 WHERE Name = ? ");
+    $stmt = $con->prepare("SELECT * FROM playstation4 INNER JOIN users ON playstation4.user_id = users.usrID WHERE Name = ? ");
     $stmt->execute(array($srch));
     $rows = $stmt->fetchAll();
     
@@ -117,10 +117,10 @@
      echo ' <div class="col-md-4">';
           echo "<img src='Uploads/Games/" . $game['Image'] . "' alt='' >";
           echo '<h5 class="underline uppercase">' . $game['Name']. '</h5>';
-          echo  '<p><span>Posted by: </span>' . $_SESSION['Username'] . '</p>';
-          echo '<p><span>description:</span>' . $game['Description'] . '</p>';
-          echo '<p><span>reqirment:</span>' . $game['Requirements'] . '</p>';
-          echo  '<p><span>others:</span>' . $game['Other'] . '</p>';
+          echo  '<p><span>Posted by: </span>' . $game['username'] . '</p>';
+          echo '<p><span>description: </span>' . $game['Description'] . '</p>';
+          echo '<p><span>reqirment: </span>' . $game['Requirements'] . '</p>';
+          echo  '<p><span>others: </span>' . $game['Other'] . '</p>';
           echo '</div> ';
     
         }

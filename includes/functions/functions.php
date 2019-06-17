@@ -53,11 +53,24 @@
 		return $count;
 	}
 
+		function checkItem2($select1, $select2, $from, $value1, $value2){
+
+		global $con;
+
+		$stmt = $con->prepare("SELECT $select1, $select2 FROM $from WHERE $select1 =? AND $select2=?");
+
+		$stmt->execute(array($value1, $value2));
+
+		$count = $stmt->rowCount();
+
+		return $count;
+	}
+
 	function getGames(){
 
 		global $con;
 
-		$getGames= $con->prepare("SELECT * FROM playstation4");
+		$getGames= $con->prepare("SELECT * FROM playstation4 INNER JOIN users ON playstation4.user_id = users.usrID");
 
 		$getGames->execute();
 

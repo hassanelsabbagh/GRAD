@@ -59,9 +59,9 @@
             <nav class="site-navigation position-relative text-right" role="navigation">
               <ul class="site-menu js-clone-nav mx-auto d-none d-lg-block">
                 <li><a href="Home.html">Home</a></li>
-                <li class="active"><a href="Profile.html">Profile</a></li>
+                <li><a href="Profile.html">Profile</a></li>
                 <li><a href="Traders.html">Traders</a></li>
-                <li><a href="Games.html">Games</a></li>
+                <li class="active"><a href="Games.html">Games</a></li>
                 <li><a href="Books.html">Books</a></li>
                 <li><a href="#"> <span class="fa fa-shopping-cart"></span></a></li>  
                 <li class="cta"><a href="login.html">Logout</a></li>              
@@ -75,66 +75,6 @@
 </header>
  <!-----tittle----->
 </br></br></br>
-
-
-<?php
-
-
-    $stmt = $con->prepare("SELECT username, Email, Fullname, PhoneNumber, Image FROM users WHERE usrID = ? ");
-    $stmt->execute(array($_SESSION['ID']));
-    $row = $stmt->fetch();
-
-
-
-   ?>
-
-    <div class="container">
-      <input type="hidden" name="userid" value="<?php echo $userid ?>">
-      <div class="form-group">
-        <label class="col-sm-2 control-label"> Image </label>
-        <div class="col-sm-10">
-         <?php echo "<img width='200' height='100' src='Uploads/Games/" . $row['Image'] . "' alt='' >";?>
-          </div>
-          </div>
-      <div class="form-group">
-        <label class="col-sm-2 control-label"> Username</label>
-        <div class="col-sm-10">
-          <label class="control-label"><?php echo $row['username'] ?></label>
-          </div>
-          </div> 
-          <div class="form-group">
-        <label class="col-sm-2 control-label">E-mail </label>
-        <div class="col-sm-10">
-          <label class="control-label"><?php echo $row['Email'] ?></label>
-          </div>
-          </div> 
-        <div class="form-group">
-        <label class="col-sm-2 control-label"> Full Name</label>
-        <div class="col-sm-10">
-          <label class="control-label"><?php echo $row['Fullname'] ?></label>
-          </div>
-          </div>
-        <div class="form-group">
-        <label class="col-sm-2 control-label"> Phone Number</label>
-        <div class="col-sm-10">
-          <label class="control-label"><?php echo $row['PhoneNumber'] ?></label>
-          </div>
-          </div>
-        
-          </div> 
-
-          <?php
-
-            echo '<center> <a href="members.php?do=Edit&userid=' . $_SESSION['ID'] . '" class="btn-custom data-aos-delay="50" style="margin-top: : 10000px"><span>Edit Profile</span></a></center>';
-            ?>
-            
-  </div>
-
-  <?php
-    
-
-    ?>
-
 </br></br></br></br></br></br></br></br>
  <!------Footer---->
     <footer class="site-footer">

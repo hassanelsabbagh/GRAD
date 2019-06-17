@@ -73,12 +73,17 @@ if ($do == 'Insert') {?>
     <div class="container-login100">
       <div class="wrap-login100 p-t-30 p-b-40">
 
-        <form class="login100-form validate-form p-b-10 p-t-5" action="?do=Insert" method="POST">
+        <form class="login100-form validate-form p-b-10 p-t-5" action="?do=Insert" method="POST" enctype="multipart/form-data">
 
           <div class="login100-form-title">
             <h3>Sign up</h3>
           </div>
 
+          <div class="wrap-input100 validate-input" data-validate = "Enter image">
+            <input class="choospic" type="file" name="Image" accept="image/*"> 
+            <span class="focus-input100" data-placeholder="&#xe82a;"></span>
+          </div>
+          
 
           <div class="wrap-input100 validate-input" data-validate = "Enter username">
             <input class="input100" type="text" name="Username" placeholder="User name">
@@ -97,6 +102,11 @@ if ($do == 'Insert') {?>
 
           <div class="wrap-input100 validate-input" data-validate = "Enter Email">
             <input class="input100" type="text" name="E-mail" placeholder="Email">
+            <span class="focus-input100" data-placeholder="&#xe82a;"></span>
+          </div>
+
+          <div class="wrap-input100 validate-input" data-validate = "Enter Your Phone Number">
+            <input class="input100" type="text" name="phoneNumber" placeholder="Phone Number">
             <span class="focus-input100" data-placeholder="&#xe82a;"></span>
           </div>
 
@@ -163,11 +173,22 @@ if ($do == 'Insert') {?>
 
       if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
+        $imgName = $_FILES['Image']['name'];
+        $imgSize = $_FILES['Image']['size'];
+        $imgTmp = $_FILES['Image']['tmp_name'];
+        $imgType = $_FILES['Image']['type'];
+
+        $imgAllowedExtension = array("jpeg", "jpg", "png");
+
+        $imgExtension = strtolower(end(explode('.', $imgName)));
+
 
         $user   = $_POST['Username'];
         $pass   = $_POST['Password'];
         $mail   = $_POST['E-mail'];
         $full   = $_POST['fullname'];
+        $phone = $_POST['phoneNumber'];
+
 
 
         $hashpass = sha1($_POST['Password']);
@@ -194,6 +215,11 @@ if ($do == 'Insert') {?>
 
           $errors[] = 'fullname cannot be empty</div>';
 
+        if(empty($phone))
+
+          $errors[] = 'phone number cannot be empty</div>';
+
+        
         foreach ($errors as $error) {
           echo '<div class="alert alert-danger">' . $error . '</div>' ; 
         }
@@ -201,6 +227,8 @@ if ($do == 'Insert') {?>
         if (empty($errors)){
 
           $check = checkItem("username", "users", $user);
+
+       
 
           if ($check == 1){
 
@@ -210,12 +238,17 @@ if ($do == 'Insert') {?>
             
           }else{
 
-          $stmt = $con->prepare("INSERT INTO users(username, password, Email, Fullname) VALUES(:zuser, :zpass, :zmail, :zname)");
+               $imagee = rand(0, 100000) . '_' . $imgName;
+          move_uploaded_file($imgTmp, "Uploads\Games\\" . $imagee);
+
+          $stmt = $con->prepare("INSERT INTO users(username, password, Email, Fullname, PhoneNumber, Image) VALUES(:zuser, :zpass, :zmail, :zname, :zphone, :zimage)");
           $stmt->execute(array(
             'zuser' => $user,
             'zpass' => $hashpass,
             'zmail' => $mail,
-            'zname' => $full
+            'zname' => $full,
+            'zphone' => $phone,
+            'zimage' => $imagee
           ));
 
           echo '<div class="alert alert-success">' . $stmt->rowCount(). 'record inserted</div>';

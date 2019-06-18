@@ -15,7 +15,7 @@
 		$do = $_GET['do'];
 } 
 
-if ($do == 'Add') { ?>
+?>
 
   	<h1 class="text-center">Add PS4 Game To Trade</h1>
   	<div class="container">
@@ -62,6 +62,8 @@ if ($do == 'Add') { ?>
 	</div>
 
  	<?php
+
+ 		if ($do == 'Add') { 
 
 
   		if ($_SERVER['REQUEST_METHOD'] == 'POST'){

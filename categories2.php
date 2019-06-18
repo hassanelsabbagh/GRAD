@@ -11,12 +11,7 @@ session_start();
     //include 'includes/templates/navbar2.php';
     include "includes/templates/footer.php";
 
-    $do = '';
-  if( isset($_GET['do'])){
-    $do = $_GET['do'];
-} 
-
-if ($do == 'Add') { ?>
+ ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -109,7 +104,14 @@ if ($do == 'Add') { ?>
 
 <?php
 
+          $do = '';
+  if( isset($_GET['do'])){
+    $do = $_GET['do'];
+} 
 
+if ($do == 'Add') {
+    
+    
       if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
         $imgName = $_FILES['Image']['name'];
@@ -159,7 +161,7 @@ if ($do == 'Add') { ?>
         if (empty($errors)){
 
           $imagee = rand(0, 100000) . '_' . $imgName;
-          move_uploaded_file($imgTmp, "Uploads\Games\\" . $imagee);
+          move_uploaded_file($imgTmp, "Imgs\Games\\" . $imagee);
         
           $stmt = $con->prepare("INSERT INTO playstation4(Name, Description, Image, Requirements, Other, user_id) VALUES(:zname, :zdesc, :zimg, :zreqs, :zother, :zmember)");
           $stmt->execute(array(
@@ -173,12 +175,10 @@ if ($do == 'Add') { ?>
 
           echo '<div class="alert alert-success">' . $stmt->rowCount(). 'record inserted</div>';
         }
-        }
-      }
+
 
   
-}else{
-  echo 'NO';
+}
 }
 ?>
 
@@ -243,4 +243,9 @@ if ($do == 'Add') { ?>
     
   </body>
 </html>
+<?php 
+
+}else{
+  echo 'blash khara';
+}
 

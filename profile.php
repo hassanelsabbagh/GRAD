@@ -93,7 +93,7 @@
       <div class="form-group">
         <label class="col-sm-2 control-label"> Image </label>
         <div class="col-sm-10">
-         <?php echo "<img width='200' height='100' src='Uploads/Games/" . $row['Image'] . "' alt='' >";?>
+         <?php echo "<img width='200' height='100' src='Imgs/Users/" . $row['ImageUsr'] . "' alt='' >";?>
           </div>
           </div>
       <div class="form-group">

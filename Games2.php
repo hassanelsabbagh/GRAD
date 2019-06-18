@@ -104,12 +104,12 @@
         foreach (getGames() as $game){
           
 
-         echo "<form method='POST' action='?do=add'>";
+        // echo "<form method='POST' action='?do=add'>";
          
           echo ' <div class="col-md-4">';
-          echo "<img src='Uploads/Games/" . $game['Image'] . "' alt='' >";
+          echo "<img src='Imgs/Games/" . $game['ImageGame'] . "' alt='' >";
           echo '<h5 class="underline uppercase">' . $game['Name']. '</h5>';
-          echo  '<p><span>Posted by: </span>' . $game['username'] . '</p>';
+          echo '<p><span>Posted by: </span>' . $game['username'] . '</p>';
           echo '<p><span>description: </span>' . $game['Description'] . '</p>';
           echo '<p><span>reqirment: </span>' . $game['Requirements'] . '</p>';
           echo  '<p><span>others: </span>' . $game['Other'] . '</p>';
@@ -118,7 +118,7 @@
           echo '</div> ';
 
 
-          echo '</form>';
+         // echo '</form>';
     
         }
 
@@ -131,7 +131,7 @@
   <?php
 
 
-  if ($do == 'add'){
+  /*if ($do == 'add'){
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
@@ -139,7 +139,7 @@
         
     $stmt = $con->prepare("SELECT usrID, itemID FROM cart WHERE usrID=? AND itemID=?");
 
-    $stmt->execute(array($_SESSION['ID'], ));
+    $stmt->execute(array($_SESSION['ID'], $game));
 
     $count = $stmt->rowCount();
 
@@ -168,6 +168,7 @@
 
 }
 }
+*/
 
 
 ?>

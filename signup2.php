@@ -1,4 +1,4 @@
-  <?php
+  <?php 
   session_start();
   include 'connect.php';
     include 'includes/functions/functions.php';
@@ -89,7 +89,6 @@ if ($do == 'Insert') {?>
             <input class="input100" type="text" name="Username" placeholder="User name">
             <span class="focus-input100" data-placeholder="&#xe82a;"></span>
           </div>
-
                <div class="wrap-input100 validate-input" data-validate="Enter password">
             <input class="input100" type="Password" name="Password" placeholder="Password">
             <span class="focus-input100" data-placeholder="&#xe80f;"></span>
@@ -239,7 +238,7 @@ if ($do == 'Insert') {?>
           }else{
 
                $imagee = rand(0, 100000) . '_' . $imgName;
-          move_uploaded_file($imgTmp, "Uploads\Games\\" . $imagee);
+          move_uploaded_file($imgTmp, "Imgs\Users\\" . $imagee);
 
           $stmt = $con->prepare("INSERT INTO users(username, password, Email, Fullname, PhoneNumber, Image) VALUES(:zuser, :zpass, :zmail, :zname, :zphone, :zimage)");
           $stmt->execute(array(
@@ -262,7 +261,6 @@ if ($do == 'Insert') {?>
     
     }
  
-
     ?>
 
   

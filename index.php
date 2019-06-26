@@ -48,6 +48,8 @@
     <link rel="stylesheet" href="design/css/aos.css">
     <link rel="stylesheet" href="design/css/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/design/css/font-awesome.min.css">
+    
+
     <link rel="icon" type="image/png" href="design/images/icons/favicon.ico"/>
 <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="design/vendor/bootstrap/css/bootstrap.min.css">
@@ -68,6 +70,8 @@
 <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="design/css/util.css">
     <link rel="stylesheet" type="text/css" href="design/css/main.css">
+
+    <link rel="stylesheet" href="css/bakr.css">
 
   <script type="text/javascript" src="design/js/jquery-3.3.1.min.js"></script>
   <script type="text/javascript" src="design/js/backend.js"></script> 
@@ -110,24 +114,10 @@
             </div>
           </div>
 
-          <div class="flex-col-c p-t-135" style="margin-top: -70px">
-            <span class="txt1 p-b-17">
-              <p>Or login with</p>
-            </span>
-          </div>
-          <div class="flex-c-m">
-            <a href="facebook.com" class="login100-social-item facebook">
-              <i class="fa fa-facebook fa-2x"></i>
-            </a>
-
-            <a href="twitter.com" class="login100-social-item twitter">
-              <i class="fa fa-twitter fa-2x "></i>
-            </a>
-          </div>
            <div class="login  login100-form-title">
-     <div class="col-xs-6">Don't Have An Account?</div>
-     <a class="col-xs-6" href="signup2.php?do=Insert">signUp</a>
-  </div>
+           <div class="col-xs-6">Don't Have An Account?</div>
+           <a class="col-xs-6" href="signup2.php?do=Insert">signUp</a>
+          </div>
 
         </form>
       </div>

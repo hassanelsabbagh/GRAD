@@ -15,9 +15,28 @@
 
 <?php
 
+     $do = '';
 
-    $stmt = $con->prepare("SELECT username, Email, Fullname, PhoneNumber, ImageUsr FROM users WHERE usrID = ? ");
-    $stmt->execute(array($_SESSION['ID']));
+      if( isset($_GET['do'])){
+
+        $do = $_GET['do'];
+
+      }else{
+
+        $do = 'Manage';
+            }
+
+
+  if ($do == 'view'){
+
+    if (isset($_GET['user'])){
+
+        $user = $_GET['user'];
+
+    }
+    
+    $stmt = $con->prepare("SELECT username, Email, Fullname, PhoneNumber, ImageUsr FROM users WHERE username = ? ");
+    $stmt->execute(array($user));
     $row = $stmt->fetch();
 
 
@@ -58,16 +77,11 @@
           </div>
         
           </div> 
-
-          <?php
-
-            echo '<center> <a href="members.php?do=Edit&userid=' . $_SESSION['ID'] . '" class="btn-custom data-aos-delay="50" style="margin-top: : 10000px"><span>Edit Profile</span></a></center>';
-            ?>
             
   </div>
 
   <?php
-    
+    }
 
     ?>
 
@@ -75,7 +89,8 @@
 
   <?php
 
-  include "includes/templates/footer.php";
+
+include "includes/templates/footer.php";
 
 }else{
   echo ' enta khammam ';

@@ -115,7 +115,7 @@
       # code...
 
      echo ' <div class="col-md-4">';
-          echo '<img src="Imgs/Games/' . $game['Image'] . '" alt="">';
+          echo '<img src="Imgs/Games/' . $game['ImageGame'] . '" alt="">';
           echo '<h5 class="underline uppercase">' . $game['Name']. '</h5>';
           echo  '<p><span>Posted by: </span>' . $game['username'] . '</p>';
           echo '<p><span>description: </span>' . $game['Description'] . '</p>';

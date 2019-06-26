@@ -7,8 +7,12 @@
   	include 'includes/functions/functions.php';
   	include 'includes/templates/header.php';
   	include "includes/languages/english.php";
-  	include 'includes/templates/navbar.php';
-  	include "includes/templates/footer.php";
+    include 'includes/templates/mainNav.php';
+  	
+    ?>
+
+
+<?php
 
   	$do = '';
 	if( isset($_GET['do'])){
@@ -36,40 +40,46 @@ if ($do == 'Manage'){
 
   	if ($stmt->rowCount()>0){ ?>
 
+
+
 	<h1 class="text-center">Edit Member</h1>
 
 	<div class="container">
-		<form class="form-horizontal" action="?do=Update" method="POST">
+		<form class="form-horizontal" action="?do=Update" method="POST" enctype="multipart/form-data">
 			<input type="hidden" name="userid" value="<?php echo $userid ?>">
-			<div class="form-group">
+      <div class="form-group edcss">
+      <label class="col-sm-2 control-label"> Image</label>
+      <div class="col-sm-3">
+      <input class="choospic" type="file" name="Image" accept="image/*"> 
+      </div>
+      </div>
+			<div class="form-group edcss">
 				<label class="col-sm-2 control-label"> Username</label>
 				<div class="col-sm-10">
 					<input type="text" name="Username" class="form-control" value="<?php echo $row['username'] ?>" required="required">
 					</div>
 					</div> 
-					<div class="form-group">
+					<div class="form-group edcss">
 				<label class="col-sm-2 control-label"> Password</label>
 				<div class="col-sm-10">
 					<input type="hidden" name="oldPassword" value="<?php echo $row['password'] ?>" >
 					<input type="Password" name="newPassword" class="form-control" autocomplete="new-password" >
 					</div>
 					</div> 
-					<div class="form-group">
+					<div class="form-group edcss">
 				<label class="col-sm-2 control-label">E-mail </label>
 				<div class="col-sm-10">
 					<input type="text" name="E-mail" class="form-control" value="<?php echo $row['Email'] ?>" required="required">
 					</div>
 					</div> 
-				<div class="form-group">
+				<div class="form-group edcss">
 				<label class="col-sm-2 control-label"> Full Name</label>
 				<div class="col-sm-10">
 					<input type="text" name="fullname" class="form-control" value="<?php echo $row['Fullname'] ?>" required="required">
 					</div>
 					</div> 
-						<div class="form-group">
-				<label class="col-sm-offset-2 col-sm-10"> Submit</label>
-				<div class="col-sm-10">
-					<input type="submit" value="update" class= "btn btn-primary">
+		      
+					<center><button class="btn-custom data-aos-delay=50" type="submit" class= "btn btn-primary"><span>Update</span></button></center>
 					</div>
 					</div> 
 		</form>
@@ -93,6 +103,15 @@ if ($do == 'Manage'){
   		echo "<h1 class='text-center'>Update Member</h1>";
 
   		if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+        $imgName = $_FILES['Image']['name'];
+        $imgSize = $_FILES['Image']['size'];
+        $imgTmp = $_FILES['Image']['tmp_name'];
+        $imgType = $_FILES['Image']['type'];
+
+        $imgAllowedExtension = array("jpeg", "jpg", "png");
+
+        $imgExtension = strtolower(end(explode('.', $imgName)));
 
   			$id 	= $_POST['userid'];
   			$user 	= $_POST['Username'];
@@ -137,13 +156,17 @@ if ($do == 'Manage'){
 
   			if (empty($errors)){
 
-  				$stmt = $con->prepare("UPDATE users SET username = ?, Email = ?, Fullname = ?, password = ? WHERE usrID = ?");
-  				$stmt->execute(array($user, $mail, $full,$pass, $id));
+          $imagee = rand(0, 100000) . '_' . $imgName;
+          move_uploaded_file($imgTmp, "Imgs\Users\\" . $imagee);
 
-  				$Msg = $stmt->rowCount(). '<div class="alert alert-success">record updated</div>';
+  				$stmt = $con->prepare("UPDATE users SET username = ?, Email = ?, Fullname = ?, password = ?, ImageUsr = ? WHERE usrID = ?");
+  				$stmt->execute(array($user, $mail, $full,$pass, $imagee, $id));
 
-          redirectHome($Msg, 'back');
-  			}
+  				echo $stmt->rowCount(). '<div class="alert alert-success">record updated</div>';
+
+          header('Refresh: 3; URL=dashboard.php');
+
+          			}
 
   		} else {
   			
@@ -227,7 +250,7 @@ if ($do == 'Manage'){
   	
   	}
 
-    
+    include "includes/templates/footer.php";
 
   	
   } else {
@@ -235,5 +258,4 @@ if ($do == 'Manage'){
   	header('Location: index.php');
   	exit();
   }
-
-  
+  ?>

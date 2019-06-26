@@ -34,6 +34,7 @@ if ($do == 'Insert') {?>
     <link rel="stylesheet" href="css/aos.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/bakr.css">
 
 
 
@@ -76,15 +77,8 @@ if ($do == 'Insert') {?>
         <form class="login100-form validate-form p-b-10 p-t-5" action="?do=Insert" method="POST" enctype="multipart/form-data">
 
           <div class="login100-form-title">
-            <h3>Sign up</h3>
+            <h3>create account</h3>
           </div>
-
-          <div class="wrap-input100 validate-input" data-validate = "Enter image">
-            <input class="choospic" type="file" name="Image" accept="image/*"> 
-            <span class="focus-input100" data-placeholder="&#xe82a;"></span>
-          </div>
-          
-
           <div class="wrap-input100 validate-input" data-validate = "Enter username">
             <input class="input100" type="text" name="Username" placeholder="User name">
             <span class="focus-input100" data-placeholder="&#xe82a;"></span>
@@ -95,12 +89,12 @@ if ($do == 'Insert') {?>
           </div>
 
           <div class="wrap-input100 validate-input" data-validate = "Enter Your Fullname">
-            <input class="input100" type="text" name="fullname" placeholder="Fullname">
+            <input class="input100" type="text" name="fullname" placeholder="Full Name">
             <span class="focus-input100" data-placeholder="&#xe82a;"></span>
           </div>
 
           <div class="wrap-input100 validate-input" data-validate = "Enter Email">
-            <input class="input100" type="text" name="E-mail" placeholder="Email">
+            <input class="input100" type="text" name="E-mail" placeholder="E-mail">
             <span class="focus-input100" data-placeholder="&#xe82a;"></span>
           </div>
 
@@ -108,37 +102,14 @@ if ($do == 'Insert') {?>
             <input class="input100" type="text" name="phoneNumber" placeholder="Phone Number">
             <span class="focus-input100" data-placeholder="&#xe82a;"></span>
           </div>
-
-
-
-     
-
-         
-
+          
           <div class="container-login100-form-btn">
             <div class="wrap-login100-form-btn">
               <div class="login100-form-bgbtn"></div>
               <button type="submit" class="login100-form-btn">sign me up</button>
             </div>
           </div>
-
-          <div class="flex-col-c p-t-80">
-            <span class="txt1 p-b-10">
-              <p>Or Sign in Using</p>
-            </span>
-          </div>
-
-          <div class="flex-c-m">
-            <a href="facebook.com" class="login100-social-item facebook">
-              <i class="fa fa-facebook fa-2x"></i>
-            </a>
-
-            <a href="twitter.com" class="login100-social-item twitter">
-              <i class="fa fa-twitter fa-2x "></i>
-            </a>
-          </div>
         
-
         </form>
       </div>
     </div>
@@ -172,15 +143,7 @@ if ($do == 'Insert') {?>
 
       if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
-        $imgName = $_FILES['Image']['name'];
-        $imgSize = $_FILES['Image']['size'];
-        $imgTmp = $_FILES['Image']['tmp_name'];
-        $imgType = $_FILES['Image']['type'];
-
-        $imgAllowedExtension = array("jpeg", "jpg", "png");
-
-        $imgExtension = strtolower(end(explode('.', $imgName)));
-
+        
 
         $user   = $_POST['Username'];
         $pass   = $_POST['Password'];
@@ -237,17 +200,16 @@ if ($do == 'Insert') {?>
             
           }else{
 
-               $imagee = rand(0, 100000) . '_' . $imgName;
-          move_uploaded_file($imgTmp, "Imgs\Users\\" . $imagee);
+         
 
-          $stmt = $con->prepare("INSERT INTO users(username, password, Email, Fullname, PhoneNumber, Image) VALUES(:zuser, :zpass, :zmail, :zname, :zphone, :zimage)");
+          $stmt = $con->prepare("INSERT INTO users(username, password, Email, Fullname, PhoneNumber) VALUES(:zuser, :zpass, :zmail, :zname, :zphone)");
           $stmt->execute(array(
             'zuser' => $user,
             'zpass' => $hashpass,
             'zmail' => $mail,
             'zname' => $full,
-            'zphone' => $phone,
-            'zimage' => $imagee
+            'zphone' => $phone
+    
           ));
 
           echo '<div class="alert alert-success">' . $stmt->rowCount(). 'record inserted</div>';

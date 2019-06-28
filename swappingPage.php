@@ -56,16 +56,24 @@ session_start();
     if ($_SESSION['ID'] == $key['userReqID']){
     ?>
       <div class="row opaas">
-        <?php
-      echo '<div class="col-md-4">';
+      <?php
+      echo '<div class="col-md-3">';
        echo '<img src="Imgs/Games/' . $key['ImageGame'] . '"alt="">';
-        ?>
+       ?>
        </div>
        <?php
-       echo '<div class="col-md-6"';
+       echo '<div class="col-md-5">';
        echo '<h5 class="underline uppercase">' . $key['Name'] . '</h5>';
-       echo '<p><span>Requested by: </span> <a href="profilevis.php?do=view&user=' . $key['username'] . '">' . $key['username'] . '</a>';
-       echo '<p><span>Offered Game: ' . $key['itemOffered'] . '</span></p>'; 
+       echo '<span>Requested by: </span> <a href="profilevis.php?do=view&user=' . $key['username'] . '">' . $key['username'] . '</a>';
+       echo '<p><span>Offered Game: ' . $key['itemOffered'] . '</span></p>';
+
+   
+
+       ?>
+       </div>
+       <?php
+       echo '<div class="col-md-4">';
+
           if ($key['status'] == 1){
             
           echo '<form action="?do=dealDoneOther&id=' . $key['reqsID'] . '&otherid=' . $key['user2Conf'] . '&userowner=' . $key['userReqdID'] . '" method="POST">';
@@ -86,18 +94,20 @@ session_start();
         echo "Waiting for acceptance";
 
          echo '<a href="?do=decline&id=' . $key['reqsID'] . '" style="padding: 7px 10px; font-size: 10px">Cancel</a>';
+         
+         }
          ?>
-     </div>
+    </div>
    </div>
    <?php
-       }
+       
    }else{
     		
     	//foreach ($row as $key) {
     	?>
     	<div class="row opaas">
     	<?php
-      echo '<div class="col-md-4">';
+      echo '<div class="col-md-3">';
        echo '<img src="Imgs/Games/' . $key['ImageGame'] . '"alt="">';
        ?>
        </div>
@@ -112,7 +122,7 @@ session_start();
        ?>
        </div>
        <?php
-       echo '<div class="col-md-2">';
+       echo '<div class="col-md-3">';
        if ($key['status'] == 0){
        echo '<form action="?do=accept&id=' . $key['reqsID'] . '&stat=' . $key['status'] . '" method="POST">';
        echo '<button type="submit" class="zor" type="button" style="padding: 7px 10px; font-size: 10px">Accept</button>';
@@ -120,9 +130,9 @@ session_start();
        echo '<a href="?do=decline&id=' . $key['reqsID'] . '" style="padding: 7px 10px; font-size: 10px">Decline</a>';
 
      }elseif($key['status'] == 1){
-      echo '<div>Item accepted</div>';
+      
        echo '<form action="?do=dealDoneOwner&id=' . $key['reqsID'] . '&ownerid=' . $key['user1Conf'] . '&userother=' . $key['userReqID'] . '" method="POST">';
-       echo '<button type="submit" style="padding: 7px 10px; font-size: 10px">Deal Done</button>';
+       
        echo '<p>How the deal goes with trader?</p>';
        echo '<select name="rate">
                 <option value="0">0</option>
@@ -132,7 +142,9 @@ session_start();
                 <option value="4">4</option>
                 <option value="5">5</option>
             </select>';
+        echo '<button type="submit" style="padding: 7px 10px; font-size: 10px">Deal Done</button>';
        echo '</form>';
+       echo '<div>Item accepted</div>';
        echo '<a href="?do=decline&id=' . $key['reqsID'] . '" style="padding: 7px 10px; font-size: 10px">Cancel</a>';
      }
 

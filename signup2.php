@@ -72,7 +72,7 @@ if ($do == 'Insert') {?>
   
   <div class="limiter">
     <div class="container-login100">
-      <div class="wrap-login100 p-t-30 p-b-40">
+      <div class="wrap-login100  overlay">
 
         <form class="login100-form validate-form p-b-10 p-t-5" action="?do=Insert" method="POST" enctype="multipart/form-data">
 

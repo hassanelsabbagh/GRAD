@@ -92,7 +92,7 @@
 -->
    <div class="limiter">
     <div class="container-login100">
-      <div class="wrap-login100 p-t-30 p-b-50">
+      <div class="wrap-login100 p-t-30 p-b-50 overlay">
         
         <form class="login100-form validate-form p-b-33 p-t-5" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
           <span class="login100-form-title">
@@ -117,9 +117,9 @@
             </div>
           </div>
 
-           <div class="login  login100-form-title">
-           <div class="col-xs-6">Don't Have An Account?</div>
-           <a class="col-xs-6" href="signup2.php?do=Insert">signUp</a>
+           <div >
+           <div class="login100-form-ttle">Forgotten account?</div>
+           <a class="login100-form-title" href="signup2.php?do=Insert">signUp</a>
           </div>
 
         </form>

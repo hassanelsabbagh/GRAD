@@ -27,8 +27,8 @@
     <div class="container">
       <input type="hidden" name="userid" value="<?php echo $userid ?>">
       <div class="form-group edcss">
-        <label class="col-sm-2 control-label "> Image </label>
-        <div class="col-sm-10">
+        <label class="col-sm-2 control-label"> Image </label>
+        <div class="col-sm-10 ">
          <?php echo "<img width='200' height='100' src='Imgs/Users/" . $row['ImageUsr'] . "' alt='' >";?>
           </div>
           </div>
@@ -61,7 +61,7 @@
 
           <?php
 
-            echo '<center> <a href="members.php?do=Edit&userid=' . $_SESSION['ID'] . '" class="btn-custom data-aos-delay="50" style="margin-top: : 10000px"><span>Edit Profile</span></a></center>';
+            echo '<center> <a href="members.php?do=Edit&userid=' . $_SESSION['ID'] . '" class="btn-custom" style="margin:20px auto"><span>Edit Profile</span></a></center>';
             ?>
             
   </div>

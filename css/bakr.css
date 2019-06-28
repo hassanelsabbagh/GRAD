@@ -76,10 +76,10 @@ width: 200px;
     position: relative;
     z-index: 2; }
 .btn-custom:before {
-    background: -webkit-gradient(linear, left top, right top, from(#c70039), color-stop(70%, #ff5733));
-    background: -webkit-linear-gradient(left, #c70039, #ff5733 70%);
-    background: -o-linear-gradient(left, #c70039, #ff5733 70%);
-    background: linear-gradient(to right, #f7d0db, #ff5733 70%);
+    background: -webkit-gradient(linear, left top, right top, from(#e86a4f), color-stop(70%, #ff5733));
+    background: -webkit-linear-gradient(left, #e86a4f, #ff5733 70%);
+    background: -o-linear-gradient(left, #e86a4f, #ff5733 70%);
+    background: linear-gradient(to right, #e86a4f, #ff5733 70%);
     content: "";
     position: absolute;
     left: 0;
@@ -283,10 +283,10 @@ width: 200px;
   transition: all 0.4s;
 
   background: #d41872;
-  background: -webkit-linear-gradient(left, #ff5733, #ff927a, #ff927a);
-  background: -o-linear-gradient(left, #ff5733, #ff927a, #ff927a);
-  background: -moz-linear-gradient(left, #ff5733, #ff927a, #ff927a);
-  background: linear-gradient(left, #ff5733, #ff927a, #ff927a);
+  background: -webkit-linear-gradient(left, #e86a4f, #ff927a, #ff927a);
+  background: -o-linear-gradient(left, #e86a4f, #ff927a, #ff927a);
+  background: -moz-linear-gradient(left, #e86a4f, #ff927a, #ff927a);
+  background: linear-gradient(left, #e86a4f, #ff927a, #ff927a);
 }
 
 .focus-input100::after {
@@ -370,10 +370,10 @@ width: 200px;
   border-radius: 0px;
 
   background: #d41872;
-  background: -webkit-linear-gradient(left, #ff5733, #ff5733, #ff927a);
-  background: -o-linear-gradient(left, #ff5733, #ff5733, #ff927a);
-  background: -moz-linear-gradient(left, #ff5733, #ff5733, #ff927a);
-  background: linear-gradient(left, #ff5733, #ff5733, #ff927a);
+  background: -webkit-linear-gradient(left, #e86a4f, #ff5733, #e86a4f);
+  background: -o-linear-gradient(left, #e86a4f, #ff5733, #e86a4f);
+  background: -moz-linear-gradient(left, #e86a4f, #ff5733, #e86a4f);
+  background: linear-gradient(left, #e86a4f, #ff5733, #e86a4f);
   position: relative;
   z-index: 1;
 

@@ -27,8 +27,12 @@
 
     <section class="ourgames text-center">
     <div class="container">
-    <div class="performance capitalize">
-    <div class="row">
+      <div class="infogames">
+        <h3 class="uppercase">my cart</h3>
+        
+      </div>
+      <div class="performance capitalize">
+        
     	
     	
 
@@ -51,29 +55,37 @@
 
     foreach ($row as $game) {
 
-
-    	
-    	   echo ' <div class="col-md-4">';
+          ?>
+          <div class="row opaas">
+          <?php
+    	   
+    	   echo ' <div class="col-md-3">';
           echo "<img src='Imgs/Games/" . $game['ImageGame'] . "' alt='' >";
+           ?>
+          </div>
+          <?php
+          echo ' <div class="col-md-5">';
           echo '<h5 class="underline uppercase">' . $game['Name']. '</h5>';
+
+          
           echo '<a href="profilevis.php?do=view&user=' . $game['username'] . '"><p><span>Posted by: </span>' . $game['username'] . '</a>';
           echo '<p><span>description: </span>' . $game['Description'] . '</p>';
           echo '<p><span>reqirment: </span>' . $game['Requirements'] . '</p>';
           echo  '<p><span>others: </span>' . $game['Other'] . '</p>';
-          echo' <div class="row" style="margin-left: 70px; ">';
+          ?>
+          </div>
+          <?php
+          
+		      echo '<div class="col-md-3"><a href="?do=remove&id=' . $game['ID'] . '">Remove</a>';
+          echo '<form action="?do=swap&id=' . $game['ID'] . '" method="POST"';
+    		  echo '<div id="lamona">';
+    		  echo '<div><button onclick="myFunction()" type="submit">SWAP</a></div>';
+    		  echo '<input class="form-control" id="txtb" type="text" name="gameoffer" placeholder="Place your game offering" required="required">';
+          echo '</form>';
+    		  echo '</div>';
+          echo '</div>';
+    		  
 
-		  echo '<div class="col-md-4"><a href="?do=remove&id=' . $game['ID'] . '" class="data-aos-delay=50 style="margin-top: : 10000px; padding: 7px 10px; font-size: 1px">Remove</a></div>';
-		   
-		  echo '<p>|</p>';
-      echo '<form class="form-horizontal" action="?do=swap&id=' . $game['ID'] . '" method="POST">';
-		  echo '<div id="lamona">';
-		  echo '<div class="col-md-4"><button onclick="myFunction()" type="submit" class="style="margin-top: : 10000px; padding: 7px 10px; font-size: 1px">SWAP</a></div>';
-		  echo '<input class="form-control" id="txtb" type="text" name="gameoffer" placeholder="Place your game offering" required="required">';
-      echo '</form>';
-		  echo '</div>';
-		  echo '</div>';
-		  echo '</div>';
-		  
        
 
 
@@ -84,7 +96,6 @@
 if ($do == 'swap'){
 
 	$id = isset($_GET['id']) && is_numeric($_GET['id']) ? intval($_GET['id']) : 'l2a';
-
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 		$gamee = $_POST['gameoffer'];
@@ -106,6 +117,7 @@ if (empty($gamee)){
   					'zstatus' => 0,
             'zuser1' => 0,
             'zuser2' => 0
+
   				));
 
   				
@@ -137,7 +149,8 @@ if ($do == 'remove'){
 	echo '<center><p>You got nothing in your cart</p></center>';
 }
 
-    ?></div>
+    ?>
+
 
 </div>
 

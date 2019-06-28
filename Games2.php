@@ -50,7 +50,7 @@
           echo '<p><span>reqirment: </span>' . $game['Requirements'] . '</p>';
           echo  '<p><span>others: </span>' . $game['Other'] . '</p>';
           
-          echo '<center> <a href="?do=addToCart&id=' . $game['ID'] . '&name=' . $game['username'] . '" class="btn-custom data-aos-delay=50 style="margin-top: : 10000px; padding: 7px 10px; font-size: 1px"><span>Add to cart</span></a></center>';
+          echo '<center> <a href="?do=addToCart&id=' . $game['ID'] . '&name=' . $game['username'] . '" class="btn-custom "><span>Add to cart</span></a></center>';
 
          echo '</div>';
 

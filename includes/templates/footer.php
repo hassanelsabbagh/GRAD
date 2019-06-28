@@ -4,7 +4,7 @@
           <div class="col-md-4">
             <h2 class="footer-heading text-uppercase mb-4">About Us</h2>
 
-          <p>This website was mainly developed for a course project. the course is mainly about database creation but we created a website to integrate with database to be more professional about our work this project was developed by four AAST students 
+          <p>This website was mainly developed for a course project. the course is mainly about database creation but we created a website to integrate with database to be more professional </p>
          <ul><li>Ahmed Bakr</li><li>Hassan El-Sabag</li><li>Ahmed El-Nagar</li><li>Mohamed Medhat</li><li>Ahmed Walied</li></ul>
 
 

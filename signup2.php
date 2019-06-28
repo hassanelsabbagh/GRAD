@@ -5,7 +5,7 @@
     include 'includes/templates/header.php';
     include "includes/languages/english.php";
    // include 'includes/templates/navbar.php';
-    include "includes/templates/footer.php";
+    
 
         $do = '';
   if( isset($_GET['do'])){
@@ -222,7 +222,7 @@ if ($do == 'Insert') {?>
       } 
     
     }
- 
+ include "includes/templates/footer.php";
     ?>
 
   

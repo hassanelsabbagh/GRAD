@@ -54,27 +54,48 @@ session_start();
     foreach ($row as $key) {
 
     if ($_SESSION['ID'] == $key['userReqID']){
-    
+    ?>
+      <div class="row opaas">
+        <?php
       echo '<div class="col-md-4">';
        echo '<img src="Imgs/Games/' . $key['ImageGame'] . '"alt="">';
+        ?>
+       </div>
+       <?php
+       echo '<div class="col-md-6"';
        echo '<h5 class="underline uppercase">' . $key['Name'] . '</h5>';
        echo '<p><span>Requested by: </span> <a href="profilevis.php?do=view&user=' . $key['username'] . '">' . $key['username'] . '</a>';
        echo '<p><span>Offered Game: ' . $key['itemOffered'] . '</span></p>'; 
           if ($key['status'] == 1){
+            
+          echo '<form action="?do=dealDoneOther&id=' . $key['reqsID'] . '&otherid=' . $key['user2Conf'] . '&userowner=' . $key['userReqdID'] . '" method="POST">';
+              echo '<p>How the deal goes with trader?</p>';
+              echo '<select name="rate">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>';
 
-          echo '<form action="?do=dealDone" method="POST">';
        echo '<button type="submit" style="padding: 7px 10px; font-size: 10px">Deal Done</button>';
        echo '</form>';
+       echo '<a href="?do=decline&id=' . $key['reqsID'] . '" style="padding: 7px 10px; font-size: 10px">Cancel</a>';
        }else{
         echo "Waiting for acceptance";
 
          echo '<a href="?do=decline&id=' . $key['reqsID'] . '" style="padding: 7px 10px; font-size: 10px">Cancel</a>';
+         ?>
+     </div>
+   </div>
+   <?php
        }
    }else{
     		
     	//foreach ($row as $key) {
     	?>
-    	<div class="row">
+    	<div class="row opaas">
     	<?php
       echo '<div class="col-md-4">';
        echo '<img src="Imgs/Games/' . $key['ImageGame'] . '"alt="">';
@@ -100,8 +121,17 @@ session_start();
 
      }elseif($key['status'] == 1){
       echo '<div>Item accepted</div>';
-       echo '<form action="?do=dealDone&id=' . $key['reqsID'] . '&usr1id=' . $key['user1Conf'] . '&usr2id=' . $key['user2Conf'] . '&stat=' . $key['status'] . '" method="POST">';
+       echo '<form action="?do=dealDoneOwner&id=' . $key['reqsID'] . '&ownerid=' . $key['user1Conf'] . '&userother=' . $key['userReqID'] . '" method="POST">';
        echo '<button type="submit" style="padding: 7px 10px; font-size: 10px">Deal Done</button>';
+       echo '<p>How the deal goes with trader?</p>';
+       echo '<select name="rate">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>';
        echo '</form>';
        echo '<a href="?do=decline&id=' . $key['reqsID'] . '" style="padding: 7px 10px; font-size: 10px">Cancel</a>';
      }
@@ -112,7 +142,7 @@ session_start();
        <?php
     	}
 
-    	$i++;
+  
    }
 
         
@@ -129,36 +159,126 @@ session_start();
 
 
 
-if ($do == 'dealDone'){
-echo "string";
+if ($do == 'dealDoneOwner'){
+
+    
      $id = isset($_GET['id']) && is_numeric($_GET['id']) ? intval($_GET['id']) : 'l2a';
-    $usr1id = isset($_GET['usr1id']) && is_numeric($_GET['usr1id']) ? intval($_GET['usr1id']) : 'l2a';
-    $usr2id = isset($_GET['user2id']) && is_numeric($_GET['user2id']) ? intval($_GET['user2id']) : 'l2a';
+    $ownerid = isset($_GET['ownerid']) && is_numeric($_GET['ownerid']) ? intval($_GET['ownerid']) : 'l2a';
+    $userother = isset($_GET['userother']) && is_numeric($_GET['userother']) ? intval($_GET['userother']) : 'l2a';
 
 	if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
+       $rate = '';
+    if (isset($_POST['rate'])){
 
-		if ($usr1id != 1){
+       $rate = $_POST['rate'];
+    }
+
+		if ($ownerid != 1){
 
 			$stmt = $con->prepare("UPDATE reqs SET user1Conf = 1 WHERE reqsID = ? ");
 
     		$stmt->execute(array($id));
+}
 
-  		}elseif ($usr2id != 1){
+      $stmt2 = $con->prepare("SELECT user1Conf, user2Conf FROM reqs WHERE user1Conf = 1 AND user2Conf = 1 AND reqsID = ? ");
 
-  			$stmt = $con->prepare("UPDATE reqs SET user2Conf = 1 WHERE reqsID = ? ");
+      $stmt2->execute(array($id));
 
-    		$stmt->execute(array($id));
+      $row = $stmt2->fetch();
 
-    	}else{
+      $count = $stmt2->rowCount();
 
-  			echo "Item is already done";
-  
-		}
+       $stmt3 = $con->prepare("INSERT INTO rating(userRater, userRated, rate) VALUES(:zuserrater, :zuserrated, :zrate)");
+
+         $stmt3->execute(array(
+            'zuserrater' => $_SESSION['ID'],
+            'zuserrated' => $userother,
+            'zrate' => $rate
+          ));
+
+      if ($count == 1 ){
+
+        echo 'Deal is done';
+
+          $id = isset($_GET['id']) && is_numeric($_GET['id']) ? intval($_GET['id']) : 'l2a';
+
+    $stmt4 = $con->prepare("DELETE FROM reqs WHERE reqsID = ? ");
+    $stmt4->execute(array($id));
+    header('Refresh: 0; URL=swappingPage.php');
+
+         
+
+      }else{
+
+        echo "Other trader didn't confirm that the deal is done";
+      }
+
 
 	}
 
 	}
+
+
+if ($do == 'dealDoneOther'){
+
+   
+    $id = isset($_GET['id']) && is_numeric($_GET['id']) ? intval($_GET['id']) : 'l2a';
+    $otherid = isset($_GET['otherid']) && is_numeric($_GET['otherid']) ? intval($_GET['otherid']) : 'l2a';
+    $userowne = isset($_GET['userowner']) && is_numeric($_GET['userowner']) ? intval($_GET['userowner']) : 'l2a';
+
+  if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+    $rate = '';
+    if (isset($_POST['rate'])){
+
+       $rate = $_POST['rate'];
+    }
+
+
+    if ($otherid != 1){
+
+      $stmt = $con->prepare("UPDATE reqs SET user2Conf = 1 WHERE reqsID = ? ");
+
+        $stmt->execute(array($id));
+}
+
+      $stmt2 = $con->prepare("SELECT user1Conf, user2Conf FROM reqs WHERE user1Conf = 1 AND user2Conf = 1 AND reqsID = ? ");
+
+      $stmt2->execute(array($id));
+
+      $row = $stmt2->fetch();
+
+      $count = $stmt2->rowCount();
+        $stmt3 = $con->prepare("INSERT INTO rating(userRater, userRated, rate) VALUES(:zuserrater, :zuserrated, :zrate)");
+
+         $stmt3->execute(array(
+            'zuserrater' => $_SESSION['ID'],
+            'zuserrated' => $userowne,
+            'zrate' => $rate
+          ));
+
+      if ($count == 1 ){
+
+        echo 'Deal is done';
+
+          $id = isset($_GET['id']) && is_numeric($_GET['id']) ? intval($_GET['id']) : 'l2a';
+
+          $stmt4 = $con->prepare("DELETE FROM reqs WHERE reqsID = ? ");
+          $stmt4->execute(array($id));
+          header('Refresh: 0; URL=swappingPage.php');
+
+       
+
+
+      }else{
+
+        echo "Other trader didn't confirm that the deal is done";
+      }
+
+
+  }
+
+  }
 
 
   if ($do == 'accept'){

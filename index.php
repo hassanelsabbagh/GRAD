@@ -48,6 +48,8 @@
     <link rel="stylesheet" href="design/css/aos.css">
     <link rel="stylesheet" href="design/css/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/design/css/font-awesome.min.css">
+
+
     
 
     <link rel="icon" type="image/png" href="design/images/icons/favicon.ico"/>
@@ -72,6 +74,12 @@
     <link rel="stylesheet" type="text/css" href="design/css/main.css">
 
     <link rel="stylesheet" href="css/bakr.css">
+
+    <style type="text/css">
+      body{
+        zoom: 80%;
+      }
+    </style>
 
   <script type="text/javascript" src="design/js/jquery-3.3.1.min.js"></script>
   <script type="text/javascript" src="design/js/backend.js"></script> 
@@ -101,11 +109,6 @@
             <span class="focus-input100" data-placeholder="&#xe80f;"></span>
           </div>
           
-          <div class="text-right ">
-            <a href="#">
-              Forgot password?
-            </a>
-          </div>
           
           <div class="container-login100-form-btn">
             <div class="wrap-login100-form-btn">
@@ -126,25 +129,6 @@
   
 
   <div id="dropDownSelect1"></div>
-  
-<!--===============================================================================================-->
-  <script src="design/vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
-  <script src="design/vendor/animsition/js/animsition.min.js"></script>
-<!--===============================================================================================-->
-  <script src="design/vendor/bootstrap/js/popper.js"></script>
-  <script src="design/vendor/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
-  <script src="design/vendor/select2/select2.min.js"></script>
-<!--===============================================================================================-->
-  <script src="design/vendor/daterangepicker/moment.min.js"></script>
-  <script src="design/vendor/daterangepicker/daterangepicker.js"></script>
-<!--===============================================================================================-->
-  <script src="design/vendor/countdowntime/countdowntime.js"></script>
-<!--===============================================================================================-->
-  <script src="design/js/main.js"></script>
-
-
 <?php
      include "includes/templates/footer.php";
 ?>

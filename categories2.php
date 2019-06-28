@@ -16,18 +16,20 @@ session_start();
 
 <section class="container">
   <div class="additem">
-      <h3>Add Item</h3>
+      <h3 class="text-center">Add Item</h3>
   </div>         
 <div class="contant">
   <form action="?do=Add" method="POST" enctype="multipart/form-data">
-          <p>Game Name</p> 
+           <p>Game Name</p> 
           <input class="form-control input-lg " type="text" name="Name" placeholder="70 charcter left">
           <input class="form-control input-lg" type="text" name="description" placeholder="Description">
           <input class="choospic" type="file" name="Image" accept="image/*"> 
           <textarea rows="4" cols="50" class="form-control input-lg faco" type="text" name="requirements" placeholder="requirements"></textarea>
           <textarea rows="4" cols="50" class="form-control input-lg faco" type="text" name="other" placeholder="Others"></textarea>
 
-          <input type="Submit" class="btn btn-danger btn-lg"></input>
+          <center><input type="Submit" class="btn-custom data-aos-delay=50" style="margin:20px auto "></input></center> 
+
+
   </form>
   
 </div>

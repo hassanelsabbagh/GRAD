@@ -77,6 +77,14 @@ display: block;
 
     $do = $_GET['do'];
 }
+
+
+    $name = '';
+
+  if (isset($_GET['name'])){
+
+    $name = $_GET['name'];
+}
 ?>
 
   <body>
@@ -119,8 +127,8 @@ display: block;
                 <?php 
 
 
-                    $stmt = $con->prepare("SELECT * FROM playstation4 INNER JOIN reqs ON playstation4.ID = reqs.itemReqID INNER JOIN users ON reqs.userReqID = users.usrID WHERE userReqdID = ?");
-                    $stmt->execute(array($_SESSION['ID']));
+                    $stmt = $con->prepare("SELECT * FROM playstation4 INNER JOIN reqs ON playstation4.ID = reqs.itemReqID INNER JOIN users ON reqs.userReqID = users.usrID WHERE userReqdID = ? OR userReqID = ?");
+                    $stmt->execute(array($_SESSION['ID'], $_SESSION['ID']));
                     $row = $stmt->fetchAll();
                     $count = $stmt->rowCount();
 
@@ -132,15 +140,11 @@ display: block;
                    
                     echo '<a href="swappingPage.php">' . $notif['username'] . '" has a swap deal for you ' . $notif['Name'] . '</a></br>'; 
                     echo'------------------';
-
-                 
-
-                  
+                
                     
       }
-    }
 
-    else{
+   } else{
        echo '<div class="dropdown-content">';
                   
                     echo '<span>You have no new notification</span></br>';

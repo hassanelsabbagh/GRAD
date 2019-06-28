@@ -781,15 +781,21 @@ h1, h2, h3, h4, h5,
   margin: 15px auto;
 }
 .ourgames{
-  margin-bottom: 20px
+  margin-bottom: 20px;
+}
+.ourgames .opaas{
+  border: 2px solid #fff; 
+  padding: 10px; 
+  border-radius: 20px;
+   margin: 10px
 }
 .ourgames .infogames h3{
   font-weight: bold;
-  color: #ff4500 ;
+  color: #ff724b ;
 }
 .ourgames .performance img{
-  width: 200px;
-  height: 200px;
+  width: 175px;
+  height: 175px;
   border-radius: 50%;
   border: 3px solid #fff  ;
   padding: 3px;

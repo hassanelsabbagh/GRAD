@@ -109,6 +109,7 @@ display: block;
         <div class="row align-items-center">
           <div class="col-11 col-xl-2">
             <h1 class="mb-0"><a href="home.html" class="text-white h2 mb-0">The<span class="text-primary">Swap</span> </a></h1>
+      
           </div>
     <!----Navbar--->
           <div class="col-12 col-md-10 d-none d-xl-block">

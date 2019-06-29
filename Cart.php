@@ -77,7 +77,7 @@
           <?php
           
 		      echo '<div class="col-md-3"><a href="?do=remove&id=' . $game['ID'] . '">Remove</a>';
-          echo '<form action="?do=swap&id=' . $game['ID'] . '" method="POST"';
+          echo '<form action="?do=swap&id=' . $game['ID'] . '&id2=' . $game['user_id'] . '" method="POST"';
     		  echo '<div id="lamona">';
     		  echo '<div><button onclick="myFunction()" type="submit">SWAP</a></div>';
     		  echo '<input class="form-control" id="txtb" type="text" name="gameoffer" placeholder="Place your game offering" required="required">';
@@ -96,6 +96,7 @@
 if ($do == 'swap'){
 
 	$id = isset($_GET['id']) && is_numeric($_GET['id']) ? intval($_GET['id']) : 'l2a';
+  $id2 = isset($_GET['id2']) && is_numeric($_GET['id2']) ? intval($_GET['id2']) : 'l2a';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 		$gamee = $_POST['gameoffer'];
@@ -111,7 +112,7 @@ if (empty($gamee)){
 		$stmt = $con->prepare("INSERT INTO reqs(userReqID, userReqdID, itemReqID, itemOffered, status, user1Conf, user2Conf) VALUES(:zuserID, :zuserdID, :zitemID, :zitemoffered, :zstatus, :zuser1, :zuser2)");
   				$stmt->execute(array(
   					'zuserID' => $_SESSION['ID'],
-  					'zuserdID' => $game['user_id'],
+  					'zuserdID' => $id2,
   					'zitemID' => $id,
   					'zitemoffered' => $gamee,
   					'zstatus' => 0,

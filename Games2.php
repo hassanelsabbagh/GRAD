@@ -82,9 +82,9 @@ if ($do == 'addToCart'){
 
     echo '<div class="alert alert-danger">item is already added to cart</div>';
 
-  }
+  }elseif($_SESSION['Username'] == $name){
 
-  if($_SESSION['Username'] == $name){
+    
 
       
     echo '<div class="alert alert-danger">Cannot add item posted by YOU</div>';

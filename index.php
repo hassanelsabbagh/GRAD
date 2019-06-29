@@ -88,14 +88,15 @@
   <script type="text/javascript" src="design/js/jquery-3.3.1.min.js"></script>
   <script type="text/javascript" src="design/js/backend.js"></script> 
 
- <!-- <form class="login" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
+ <!-- <form class="login" action="<?php //echo $_SERVER['PHP_SELF'] ?>" method="POST">
         <input class="form-control" type="text" name="user" placeholder="username" autocomplete="off"	 />
         <input class="form-control" type="password" name="pass" placeholder="password" autocomplete="new-password"/>
         <input class="btn btn-primary btn-block" type="submit" value="login"  />
    </form>
 -->
-
-      <div class="terms">
+   <div class="limiter">
+    <div class="container-login100">
+      <div class="wrap-login100 p-t-30 p-b-50 overlay">
         
         <form class="login100-form validate-form p-b-33 p-t-5" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
           <span class="login100-form-title">

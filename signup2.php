@@ -1,5 +1,6 @@
   <?php 
   session_start();
+  ob_start();
   include 'connect.php';
     include 'includes/functions/functions.php';
     include 'includes/templates/header.php';
@@ -67,7 +68,11 @@ if ($do == 'Insert') {?>
 <!--===============================================================================================-->
   </head>
   
-
+<style type="text/css">
+      body{
+        zoom: 80%;
+      }
+    </style>
   <body>
   
   <div class="limiter">
@@ -100,6 +105,16 @@ if ($do == 'Insert') {?>
 
           <div class="wrap-input100 validate-input" data-validate = "Enter Your Phone Number">
             <input class="input100" type="text" name="phoneNumber" placeholder="Phone Number">
+            <span class="focus-input100" data-placeholder="&#xe82a;"></span>
+          </div>
+
+          <div class="wrap-input100 validate-input" data-validate = "Enter Your National ID">
+            <input class="input100" type="text" name="nationalID" placeholder="National ID">
+            <span class="focus-input100" data-placeholder="&#xe82a;"></span>
+          </div>
+
+          <div class="wrap-input100 validate-input" data-validate = "Enter Your Location">
+            <input class="input100" type="text" name="location" placeholder="Location..ex: Cairo/Nasr city">
             <span class="focus-input100" data-placeholder="&#xe82a;"></span>
           </div>
           
@@ -150,8 +165,10 @@ if ($do == 'Insert') {?>
         $mail   = $_POST['E-mail'];
         $full   = $_POST['fullname'];
         $phone = $_POST['phoneNumber'];
-
-
+        $nat = $_POST['nationalID'];
+        $loc = $_POST['location'];
+        $numLength = strlen((string)$phone);
+        $natLength = strlen((string)$nat);
 
         $hashpass = sha1($_POST['Password']);
 
@@ -181,7 +198,14 @@ if ($do == 'Insert') {?>
 
           $errors[] = 'phone number cannot be empty</div>';
 
-        
+        if($numLength != 11)
+
+          $errors[] = 'Phone number must be 11 digits </div>';
+
+        if($natLength != 14)
+
+          $errors[] = 'National ID must be 14 digits </div>';
+
         foreach ($errors as $error) {
           echo '<div class="alert alert-danger">' . $error . '</div>' ; 
         }
@@ -202,17 +226,21 @@ if ($do == 'Insert') {?>
 
          
 
-          $stmt = $con->prepare("INSERT INTO users(username, password, Email, Fullname, PhoneNumber) VALUES(:zuser, :zpass, :zmail, :zname, :zphone)");
+          $stmt = $con->prepare("INSERT INTO users(username, password, Email, Fullname, PhoneNumber, NationalID, Address) VALUES(:zuser, :zpass, :zmail, :zname, :zphone, :znat, :zloc)");
           $stmt->execute(array(
             'zuser' => $user,
             'zpass' => $hashpass,
             'zmail' => $mail,
             'zname' => $full,
-            'zphone' => $phone
+            'zphone' => $phone,
+            'znat' => $nat, 
+            'zloc' => $loc
     
           ));
 
           echo '<div class="alert alert-success">' . $stmt->rowCount(). 'record inserted</div>';
+
+          header('Refresh: 3; URL=index.php');
          
 
         }

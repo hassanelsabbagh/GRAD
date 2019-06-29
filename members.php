@@ -1,5 +1,6 @@
  <?php
   session_start();
+  ob_start();
   if (isset($_SESSION['Username'])){
 
   	$pageTitle = 'home';
@@ -77,7 +78,13 @@ if ($do == 'Manage'){
 				<div class="col-sm-10">
 					<input type="text" name="fullname" class="form-control" value="<?php echo $row['Fullname'] ?>" required="required">
 					</div>
-					</div> 
+					</div>
+              <div class="form-group edcss">
+        <label class="col-sm-2 control-label"> Location</label>
+        <div class="col-sm-10">
+          <input type="text" name="location" class="form-control" value="<?php echo $row['Address'] ?>" required="required">
+          </div>
+          </div>  
 		      
 					<center><button class="btn-custom data-aos-delay=50" type="submit" class= "btn btn-primary"><span>Update</span></button></center>
 					</div>
@@ -117,6 +124,7 @@ if ($do == 'Manage'){
   			$user 	= $_POST['Username'];
   			$mail 	= $_POST['E-mail'];
   			$full   = $_POST['fullname'];
+        $loc = $_POST['location'];
 
 
   			$pass = '';
@@ -159,8 +167,8 @@ if ($do == 'Manage'){
           $imagee = rand(0, 100000) . '_' . $imgName;
           move_uploaded_file($imgTmp, "Imgs\Users\\" . $imagee);
 
-  				$stmt = $con->prepare("UPDATE users SET username = ?, Email = ?, Fullname = ?, password = ?, ImageUsr = ? WHERE usrID = ?");
-  				$stmt->execute(array($user, $mail, $full,$pass, $imagee, $id));
+  				$stmt = $con->prepare("UPDATE users SET username = ?, Email = ?, Fullname = ?, password = ?, ImageUsr = ?, Address = ? WHERE usrID = ?");
+  				$stmt->execute(array($user, $mail, $full,$pass, $imagee,$loc, $id));
 
   				echo $stmt->rowCount(). '<div class="alert alert-success">record updated</div>';
 

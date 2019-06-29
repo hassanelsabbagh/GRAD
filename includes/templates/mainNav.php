@@ -136,15 +136,23 @@ display: block;
 
                     foreach ($row as $notif) {
                   
-                    
+                    if($_SESSION['ID'] != $notif['userReqID']){
                    
-                    echo '<a href="swappingPage.php">' . $notif['username'] . '" has a swap deal for you ' . $notif['Name'] . '</a></br>'; 
+                    echo '<a href="swappingPage.php">' . $notif['username'] . ' has a swap deal for you for ' . $notif['Name'] . '</a></br>'; 
                     echo'------------------';
                 
                     
+      }else{
+
+        echo '<div class="dropdown-content">';
+                  
+                    echo '<span>You have no new notification</span></br>';
+                    echo '</div>';
+
       }
 
-   } else{
+   }
+   }else{
        echo '<div class="dropdown-content">';
                   
                     echo '<span>You have no new notification</span></br>';

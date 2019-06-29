@@ -19,7 +19,7 @@
   	$password = $_POST['pass'];
   	$hashedpass = sha1($password); 
 
-  	$stmt = $con->prepare("SELECT usrID, username, password FROM users WHERE username = ? AND password = ? LIMIT 1");
+  	$stmt = $con->prepare("SELECT usrID, username, password FROM users WHERE BINARY username = ? AND password = ? LIMIT 1");
   	$stmt->execute(array($username, $hashedpass));
     $row = $stmt->fetch();
   	$count = $stmt->rowCount();
@@ -118,7 +118,7 @@
           </div>
 
            <div >
-           <div class="login100-form-ttle">Forgotten account?</div>
+           <div class="login100-form-ttle">Don't have an account?</div>
            <a class="login100-form-title" href="signup2.php?do=Insert">signUp</a>
           </div>
 

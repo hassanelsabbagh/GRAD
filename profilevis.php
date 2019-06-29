@@ -35,7 +35,7 @@
 
     }
     
-    $stmt = $con->prepare("SELECT username, Email, Fullname, PhoneNumber, ImageUsr, AVG(userRated) FROM users INNER JOIN rating ON users.usrID = rating.userRated WHERE username = ? ");
+    $stmt = $con->prepare("SELECT username, Email, Fullname, PhoneNumber, ImageUsr, Address, AVG(userRated) FROM users INNER JOIN rating ON users.usrID = rating.userRated WHERE username = ? ");
     $stmt->execute(array($user));
     $row = $stmt->fetch();
 
@@ -73,6 +73,12 @@
         <label class="col-sm-2 control-label"> Phone Number</label>
         <div class="col-sm-10">
           <label class="control-label form-control"><?php echo $row['PhoneNumber'] ?></label>
+          </div>
+          </div>
+            <div class="form-group edcss">
+        <label class="col-sm-2 control-label"> Phone Number</label>
+        <div class="col-sm-10">
+          <label class="control-label form-control"><?php echo $row['Address'] ?></label>
           </div>
           </div>
            <div class="form-group edcss">

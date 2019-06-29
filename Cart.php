@@ -122,8 +122,10 @@ if (empty($gamee)){
 
   				
  
-  		$stmt2 = $con->prepare("DELETE FROM cart WHERE itemID = ?");
+  	$stmt2 = $con->prepare("DELETE FROM cart WHERE itemID = ?");
 		$stmt2->execute(array($id));
+
+    
 
 		header('Refresh: 0; URL=cart.php');
 	}		
@@ -139,8 +141,10 @@ if ($do == 'remove'){
 
 		$id = isset($_GET['id']) && is_numeric($_GET['id']) ? intval($_GET['id']) : 'l2a';
 
-		$stmt = $con->prepare("DELETE FROM cart WHERE ID = ?");
+		$stmt = $con->prepare("DELETE FROM cart WHERE itemID = ?");
 		$stmt->execute(array($id));
+
+    echo "item deleted";
 
 		header('Refresh: 0; URL=cart.php');
 	}

@@ -105,7 +105,7 @@
 include "includes/templates/footer.php";
 
 }else{
-  echo ' enta khammam ';
+  echo ' Not Allowed ';
     header('Location: index.php');
     exit();
 }

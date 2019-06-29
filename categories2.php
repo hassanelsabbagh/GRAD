@@ -96,7 +96,7 @@ if ($do == 'Add') {
           $imagee = rand(0, 100000) . '_' . $imgName;
           move_uploaded_file($imgTmp, "Imgs\Games\\" . $imagee);
         
-          $stmt = $con->prepare("INSERT INTO playstation4(Name, Description, ImageGame, Requirements, Other, user_id) VALUES(:zname, :zdesc, :zimg, :zreqs, :zother, :zmember)");
+          $stmt = $con->prepare("INSERT INTO playstation4(Name, Description, ImageGames, Requirements, Other, user_id) VALUES(:zname, :zdesc, :zimg, :zreqs, :zother, :zmember)");
           $stmt->execute(array(
             'zname' => $name,
             'zdesc' => $desc,
@@ -118,6 +118,6 @@ include "includes/templates/footer.php";
 
 
 }else{
-  echo 'blash khara';
+  echo 'Not allowed';
 }
 

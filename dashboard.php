@@ -15,7 +15,7 @@
 
   	
   } else {
-  	echo ' enta khammam ';
+  	echo ' not allowed ';
   	header('Location: index.php');
   	exit();
   }

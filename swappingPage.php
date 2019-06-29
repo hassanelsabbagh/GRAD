@@ -325,7 +325,7 @@ if ($do == 'dealDoneOther'){
   }
 
    } else {
-  	echo ' enta khammam ';
+  	echo ' Not Allowed ';
   	header('Location: index.php');
   	exit();
   }

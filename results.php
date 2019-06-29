@@ -88,7 +88,7 @@
   include "includes/templates/footer.php";
 
 }else{
-  echo ' enta khammam ';
+  echo ' Not allowed ';
     header('Location: index.php');
     exit();
 }

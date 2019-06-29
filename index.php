@@ -30,7 +30,11 @@
   		header('Location: dashboard.php');
   		exit();
 
-  	}
+  	}else{
+      ?>
+      <script> document.getElementById("wrong").innerHTML = "wrong username or password"</script>
+      <?php
+    }
 
   }
 ?>
@@ -90,9 +94,8 @@
         <input class="btn btn-primary btn-block" type="submit" value="login"  />
    </form>
 -->
-   <div class="limiter">
-    <div class="container-login100">
-      <div class="wrap-login100 p-t-30 p-b-50 overlay">
+
+      <div class="terms">
         
         <form class="login100-form validate-form p-b-33 p-t-5" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
           <span class="login100-form-title">
@@ -121,6 +124,10 @@
            <div class="login100-form-ttle">Don't have an account?</div>
            <a class="login100-form-title" href="signup2.php?do=Insert">signUp</a>
           </div>
+
+             
+           <div id="wrong" style="color:white"></div>
+          
 
         </form>
       </div>

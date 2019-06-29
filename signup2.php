@@ -117,6 +117,11 @@ if ($do == 'Insert') {?>
             <input class="input100" type="text" name="location" placeholder="Location..ex: Cairo/Nasr city">
             <span class="focus-input100" data-placeholder="&#xe82a;"></span>
           </div>
+
+            <div style="text-align: center" class="wrap-input100 validate-input" data-validate = "Check">
+            <input type="checkbox" style="width: 15px; height: 15px" required="required"><a style="font-size: large" href="terms.php">Terms and conditions</a>>
+            <span data-placeholder="&#xe82a;"></span>
+          </div>
           
           <div class="container-login100-form-btn">
             <div class="wrap-login100-form-btn">
@@ -126,9 +131,11 @@ if ($do == 'Insert') {?>
           </div>
         
         </form>
+        <a href="index.php">Sign In</a>
       </div>
     </div>
   </div>
+  
   
 
   <div id="dropDownSelect1"></div>

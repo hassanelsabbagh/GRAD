@@ -1,7 +1,7 @@
 
 
 .bbox{
-	border-radius: 15px 50px;
+  border-radius: 15px 50px;
   background: #FF4500;
   padding: 100px; 
   width: 700px;
@@ -71,7 +71,9 @@ width: 200px;
   padding: 10px 10px;
   display: inline-block;
   letter-spacing: .2em;
-  position: relative; }
+  position: relative;
+  margin:20px auto;  
+   }
 .btn-custom > span {
     position: relative;
     z-index: 2; }
@@ -94,16 +96,16 @@ width: 200px;
     width: 100%; }
 /* start profile title*/
 .edcss label{
-	color: #ff5733;
-	font-style: italic;
-	font-size: medium;
-	color: #ff927a;
+  color: #ff5733;
+  font-style: italic;
+  font-size: medium;
+  color: #ff927a;
 }
 /*end profile title*/
 .site-navbar h1 span{
-	font-weight: bold;
-	font-style:italic;
-	color: #ff4500 !important;
+  font-weight: bold;
+  font-style:italic;
+  color: #ff4500 !important;
 }
 /*start login*/
 .login100-form-title h3{
@@ -148,8 +150,30 @@ width: 200px;
 }
 
 .container-login100 {
-  width: 100%;  
-  height: 150vh;
+  width: 100%; 
+  height: auto; 
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  background: url(../css/blabla.jpg);
+  background-color: #232531;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  z-index: 1; 
+
+}
+
+.container-login10 {
+  width: 100%; 
+  height: 180vh; 
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
@@ -173,7 +197,6 @@ width: 200px;
   position: absolute;
   top: 10px;
   background-color: rgba(0,0,0,.3);
-  min-height: 115vh;
 }
 
 .container-login100::before {
@@ -189,7 +212,7 @@ width: 200px;
 }
 
 .wrap-login100 {
-  width: 390px;
+  width: 450px;
   border-radius: 10px;
   overflow: hidden;
 

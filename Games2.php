@@ -42,7 +42,7 @@
 
         //echo "<form method='POST' action='?do=add'>";
          
-          echo ' <div class="col-md-4">';
+          echo ' <div class=" col-md-3 opaas ">';
           echo "<img src='Imgs/Games/" . $game['ImageGame'] . "' alt='' >";
           echo '<h5 class="underline uppercase">' . $game['Name']. '</h5>';
           echo '<a href="profilevis.php?do=view&user=' . $game['username'] . '"<p><span>Posted by: </span>' . $game['username'] . '</a>';

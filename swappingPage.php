@@ -105,9 +105,9 @@ session_start();
     		
     	//foreach ($row as $key) {
     	?>
-    	<div class="row opaas">
+    	<div class="row opaas ">
     	<?php
-      echo '<div class="col-md-3">';
+      echo '<div class="col-md-3 ">';
        echo '<img src="Imgs/Games/' . $key['ImageGame'] . '"alt="">';
        ?>
        </div>

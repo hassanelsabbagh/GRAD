@@ -76,7 +76,7 @@ if ($do == 'Insert') {?>
   <body>
   
   <div class="limiter">
-    <div class="container-login100">
+    <div class="container-login100 container-login10">
       <div class="wrap-login100  overlay">
 
         <form class="login100-form validate-form p-b-10 p-t-5" action="?do=Insert" method="POST" enctype="multipart/form-data">
@@ -131,7 +131,7 @@ if ($do == 'Insert') {?>
           </div>
         
         </form>
-        <a href="index.php">Sign In</a>
+        <a class="login100-form-title" href="index.php">Sign In</a>
       </div>
     </div>
   </div>

@@ -10,18 +10,10 @@ session_start();
     include 'includes/templates/header.php';
     include "includes/languages/english.php";
     include 'includes/templates/mainNav.php';
-    //include 'includes/templates/footer.php';
+   
     
     
 ?>
-
-<style type="text/css">
-	
-	.ext{
-		display: none;
-	}
-</style>
-
 
     <section class="ourgames text-center">
     <div class="container">
@@ -77,9 +69,10 @@ session_start();
 
           if ($key['status'] == 1){
             
-          echo '<form action="?do=dealDoneOther&id=' . $key['reqsID'] . '&otherid=' . $key['user2Conf'] . '&userowner=' . $key['userReqdID'] . '" method="POST">';
-              echo '<p>How the deal goes with trader?</p>';
-              echo '<select name="rate">
+
+          echo '<form action="?do=dealDoneOther&id=' . $key['reqsID'] . '&otherid=' . $key['user2Conf'] . '&userowner=' . $key['userReqdID'] . '&gameid=' . $key['ID'] . '" method="POST">';
+              echo '<p>Press "Deal Done" when the deal is done</p>';
+              echo '<p style="text-align: left; display: inline-block">Rate Trader &nbsp</p><select name="rate">
                 <option value="0">0</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -93,6 +86,7 @@ session_start();
        echo '<button type="submit" style="padding: 7px 10px; font-size: 10px">Deal Done</button>';
        echo '</form>';
        echo '<a href="?do=decline&id=' . $key['reqsID'] . '" style="padding: 7px 10px; font-size: 10px">Cancel</a>';
+
        }else{
         echo "Waiting for acceptance";
 
@@ -133,9 +127,10 @@ session_start();
        echo '<a href="?do=decline&id=' . $key['reqsID'] . '" style="padding: 7px 10px; font-size: 10px">Decline</a>';
 
      }elseif($key['status'] == 1){
+
       
-       echo '<form action="?do=dealDoneOwner&id=' . $key['reqsID'] . '&ownerid=' . $key['user1Conf'] . '&userother=' . $key['userReqID'] . '" method="POST">';
-       
+       echo '<form action="?do=dealDoneOwner&id=' . $key['reqsID'] . '&ownerid=' . $key['user1Conf'] . '&userother=' . $key['userReqID'] . '&gameid=' . $key['ID'] . '" method="POST">';
+       echo '<p> Press "done deal" when the deal is done';
        echo '<p>Rate Trader</p>';
        echo '<select name="rate">
                 <option value="0">0</option>
@@ -147,11 +142,11 @@ session_start();
             </select>';
             echo '</br>';
             echo '</br>';
-        echo '<button type="submit" style="padding: 7px 10px; font-size: 10px">Deal Done</button>';
+        echo '<button type="submit" id="done" style="padding: 7px 10px; font-size: 10px">Deal Done</button>';
        echo '</form>';
        echo '<div>Item accepted</div>';
        echo '<a href="?do=decline&id=' . $key['reqsID'] . '" style="padding: 7px 10px; font-size: 10px">Cancel</a>';
-   }
+ }
 
        ?>
        </div>
@@ -182,6 +177,7 @@ if ($do == 'dealDoneOwner'){
      $id = isset($_GET['id']) && is_numeric($_GET['id']) ? intval($_GET['id']) : 'No';
     $ownerid = isset($_GET['ownerid']) && is_numeric($_GET['ownerid']) ? intval($_GET['ownerid']) : 'No';
     $userother = isset($_GET['userother']) && is_numeric($_GET['userother']) ? intval($_GET['userother']) : 'No';
+    $game = isset($_GET['gameid']) && is_numeric($_GET['gameid']) ? intval($_GET['gameid']) : 'No';
 
 	if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
@@ -197,7 +193,6 @@ if ($do == 'dealDoneOwner'){
 
     		$stmt->execute(array($id));
 
-        
 }
 
       $stmt2 = $con->prepare("SELECT user1Conf, user2Conf FROM reqs WHERE user1Conf = 1 AND user2Conf = 1 AND reqsID = ? ");
@@ -224,15 +219,15 @@ if ($do == 'dealDoneOwner'){
 
     $stmt4 = $con->prepare("DELETE FROM reqs WHERE reqsID = ? ");
     $stmt4->execute(array($id));
+    $stmt5 = $con->prepare("DELETE FROM playstation4 WHERE ID = ? ");
+    $stmt5->execute(array($game));
     header('Refresh: 0; URL=swappingPage.php');
 
          
 
       }else{
-
-        echo "Other trader didn't confirm that the deal is done";
-      }
-
+      echo "Thank you for done dealing, other trader didn't confirm that the deal is done yet";
+}
 
 
 
@@ -247,6 +242,7 @@ if ($do == 'dealDoneOther'){
     $id = isset($_GET['id']) && is_numeric($_GET['id']) ? intval($_GET['id']) : 'No';
     $otherid = isset($_GET['otherid']) && is_numeric($_GET['otherid']) ? intval($_GET['otherid']) : 'No';
     $userowne = isset($_GET['userowner']) && is_numeric($_GET['userowner']) ? intval($_GET['userowner']) : 'No';
+    $game = isset($_GET['gameid']) && is_numeric($_GET['gameid']) ? intval($_GET['gameid']) : 'No';
 
   if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $rate = '';
@@ -289,6 +285,8 @@ if ($do == 'dealDoneOther'){
 
           $stmt4 = $con->prepare("DELETE FROM reqs WHERE reqsID = ? ");
           $stmt4->execute(array($id));
+          $stmt5 = $con->prepare("DELETE FROM playstation4 WHERE ID = ? ");
+          $stmt5->execute(array($game));
           header('Refresh: 0; URL=swappingPage.php');
 
        
@@ -296,7 +294,8 @@ if ($do == 'dealDoneOther'){
 
       }else{
 
-        echo "Other trader didn't confirm that the deal is done";
+        echo "Thank you for done dealing, other trader didn't confirm that the deal is done yet";
+
       }
 
 
@@ -341,6 +340,8 @@ if ($do == 'dealDoneOther'){
   	header('Location: index.php');
   	exit();
   }
+
+   include 'includes/templates/footer.php';
 
 ?>
 

@@ -95,8 +95,8 @@
 
 if ($do == 'swap'){
 
-	$id = isset($_GET['id']) && is_numeric($_GET['id']) ? intval($_GET['id']) : 'l2a';
-  $id2 = isset($_GET['id2']) && is_numeric($_GET['id2']) ? intval($_GET['id2']) : 'l2a';
+	$id = isset($_GET['id']) && is_numeric($_GET['id']) ? intval($_GET['id']) : 'No';
+  $id2 = isset($_GET['id2']) && is_numeric($_GET['id2']) ? intval($_GET['id2']) : 'No';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 		$gamee = $_POST['gameoffer'];

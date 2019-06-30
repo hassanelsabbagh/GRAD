@@ -31,12 +31,13 @@
   		exit();
 
   	}else{
-      ?>
-      <script> document.getElementById("wrong").innerHTML = "wrong username or password"</script>
-      <?php
+
+      header("location:index.php?msg=failed");
     }
 
   }
+
+
 ?>
 
  <!-- <link rel="stylesheet" type="text/css" href="design/css/bootstrap.min.css"> -->
@@ -103,6 +104,15 @@
             <h3>sign in</h3>
           </span>
 
+              <div style="text-align: center; color: white" id="wrong" style="color:white">
+            <?php
+
+               if (isset($_GET["msg"]) && $_GET["msg"] == 'failed') {
+              echo "Wrong Username / Password";
+                }
+                ?>
+           </div>
+           
           <div class="wrap-input100 validate-input" data-validate = "Username">
             <input class="input100" type="text" name="user" placeholder="User name">
             <span class="focus-input100" data-placeholder="&#xe82a;"></span>
@@ -127,7 +137,7 @@
           </div>
 
              
-           <div id="wrong" style="color:white"></div>
+       
           
 
         </form>

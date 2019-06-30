@@ -10,7 +10,7 @@ session_start();
     include 'includes/templates/header.php';
     include "includes/languages/english.php";
     include 'includes/templates/mainNav.php';
-    
+    //include 'includes/templates/footer.php';
     
     
 ?>
@@ -21,6 +21,7 @@ session_start();
 		display: none;
 	}
 </style>
+
 
     <section class="ourgames text-center">
     <div class="container">
@@ -86,6 +87,8 @@ session_start();
                 <option value="4">4</option>
                 <option value="5">5</option>
             </select>';
+            echo '</br>';
+            echo '</br>';
 
        echo '<button type="submit" style="padding: 7px 10px; font-size: 10px">Deal Done</button>';
        echo '</form>';
@@ -133,7 +136,7 @@ session_start();
       
        echo '<form action="?do=dealDoneOwner&id=' . $key['reqsID'] . '&ownerid=' . $key['user1Conf'] . '&userother=' . $key['userReqID'] . '" method="POST">';
        
-       echo '<p>How the deal goes with trader?</p>';
+       echo '<p>Rate Trader</p>';
        echo '<select name="rate">
                 <option value="0">0</option>
                 <option value="1">1</option>
@@ -142,11 +145,13 @@ session_start();
                 <option value="4">4</option>
                 <option value="5">5</option>
             </select>';
+            echo '</br>';
+            echo '</br>';
         echo '<button type="submit" style="padding: 7px 10px; font-size: 10px">Deal Done</button>';
        echo '</form>';
        echo '<div>Item accepted</div>';
        echo '<a href="?do=decline&id=' . $key['reqsID'] . '" style="padding: 7px 10px; font-size: 10px">Cancel</a>';
-     }
+   }
 
        ?>
        </div>
@@ -174,9 +179,9 @@ session_start();
 if ($do == 'dealDoneOwner'){
 
     
-     $id = isset($_GET['id']) && is_numeric($_GET['id']) ? intval($_GET['id']) : 'l2a';
-    $ownerid = isset($_GET['ownerid']) && is_numeric($_GET['ownerid']) ? intval($_GET['ownerid']) : 'l2a';
-    $userother = isset($_GET['userother']) && is_numeric($_GET['userother']) ? intval($_GET['userother']) : 'l2a';
+     $id = isset($_GET['id']) && is_numeric($_GET['id']) ? intval($_GET['id']) : 'No';
+    $ownerid = isset($_GET['ownerid']) && is_numeric($_GET['ownerid']) ? intval($_GET['ownerid']) : 'No';
+    $userother = isset($_GET['userother']) && is_numeric($_GET['userother']) ? intval($_GET['userother']) : 'No';
 
 	if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
@@ -191,6 +196,8 @@ if ($do == 'dealDoneOwner'){
 			$stmt = $con->prepare("UPDATE reqs SET user1Conf = 1 WHERE reqsID = ? ");
 
     		$stmt->execute(array($id));
+
+        
 }
 
       $stmt2 = $con->prepare("SELECT user1Conf, user2Conf FROM reqs WHERE user1Conf = 1 AND user2Conf = 1 AND reqsID = ? ");
@@ -213,7 +220,7 @@ if ($do == 'dealDoneOwner'){
 
         echo 'Deal is done';
 
-          $id = isset($_GET['id']) && is_numeric($_GET['id']) ? intval($_GET['id']) : 'l2a';
+          $id = isset($_GET['id']) && is_numeric($_GET['id']) ? intval($_GET['id']) : 'No';
 
     $stmt4 = $con->prepare("DELETE FROM reqs WHERE reqsID = ? ");
     $stmt4->execute(array($id));
@@ -227,6 +234,8 @@ if ($do == 'dealDoneOwner'){
       }
 
 
+
+
 	}
 
 	}
@@ -235,9 +244,9 @@ if ($do == 'dealDoneOwner'){
 if ($do == 'dealDoneOther'){
 
    
-    $id = isset($_GET['id']) && is_numeric($_GET['id']) ? intval($_GET['id']) : 'l2a';
-    $otherid = isset($_GET['otherid']) && is_numeric($_GET['otherid']) ? intval($_GET['otherid']) : 'l2a';
-    $userowne = isset($_GET['userowner']) && is_numeric($_GET['userowner']) ? intval($_GET['userowner']) : 'l2a';
+    $id = isset($_GET['id']) && is_numeric($_GET['id']) ? intval($_GET['id']) : 'No';
+    $otherid = isset($_GET['otherid']) && is_numeric($_GET['otherid']) ? intval($_GET['otherid']) : 'No';
+    $userowne = isset($_GET['userowner']) && is_numeric($_GET['userowner']) ? intval($_GET['userowner']) : 'No';
 
   if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $rate = '';
@@ -252,6 +261,7 @@ if ($do == 'dealDoneOther'){
       $stmt = $con->prepare("UPDATE reqs SET user2Conf = 1 WHERE reqsID = ? ");
 
         $stmt->execute(array($id));
+        
 }
 
       $stmt2 = $con->prepare("SELECT user1Conf, user2Conf FROM reqs WHERE user1Conf = 1 AND user2Conf = 1 AND reqsID = ? ");
@@ -269,11 +279,13 @@ if ($do == 'dealDoneOther'){
             'zrate' => $rate
           ));
 
+  
+
       if ($count == 1 ){
 
         echo 'Deal is done';
 
-          $id = isset($_GET['id']) && is_numeric($_GET['id']) ? intval($_GET['id']) : 'l2a';
+          $id = isset($_GET['id']) && is_numeric($_GET['id']) ? intval($_GET['id']) : 'No';
 
           $stmt4 = $con->prepare("DELETE FROM reqs WHERE reqsID = ? ");
           $stmt4->execute(array($id));
@@ -329,7 +341,7 @@ if ($do == 'dealDoneOther'){
   	header('Location: index.php');
   	exit();
   }
-include 'includes/templates/footer.php';
+
 ?>
 
 
